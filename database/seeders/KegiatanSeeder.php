@@ -80,6 +80,28 @@ class KegiatanSeeder extends Seeder
                 'is_active' => true,
                 'urutan' => 6,
             ],
+            [
+                'nama' => 'Nonton Bareng Film Islami',
+                'slug' => 'nobar-islami',
+                'deskripsi' => 'Menonton film animasi Islami bersama untuk edukasi dan hiburan',
+                'konten' => 'Kegiatan menonton bersama film animasi Islami menggunakan proyektor. Santri dapat belajar nilai-nilai Islam melalui cerita yang menarik dan menghibur seperti kisah para Nabi dan Sahabat.',
+                'hari' => 'Minggu',
+                'waktu' => '09:00 - 11:00',
+                'tempat' => 'Ruang Multimedia',
+                'is_active' => true,
+                'urutan' => 7,
+            ],
+            [
+                'nama' => 'Belajar Iqra',
+                'slug' => 'belajar-iqra',
+                'deskripsi' => 'Pembelajaran dasar membaca Al-Quran dengan metode Iqra',
+                'konten' => 'Program belajar membaca Al-Quran dari dasar menggunakan metode Iqra. Santri akan dibimbing tahap demi tahap hingga mahir membaca Al-Quran dengan lancar.',
+                'hari' => 'Senin - Jumat',
+                'waktu' => '16:00 - 17:30',
+                'tempat' => 'Ruang Belajar',
+                'is_active' => true,
+                'urutan' => 8,
+            ],
         ];
 
         foreach ($kegiatan as $item) {
