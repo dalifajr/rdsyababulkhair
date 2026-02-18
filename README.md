@@ -81,6 +81,18 @@ Download file `ca.pem` dari Aiven Console dan simpan di `storage/certs/ca.pem`.
 4. Set environment variables di Vercel dashboard
 5. Deploy!
 
+### Troubleshooting Redeploy (Penting)
+
+Jika tampilan terbaru belum muncul saat redeploy:
+
+1. Pastikan Project Root Directory di Vercel = `/` (root repository).
+2. Pastikan Build Command terbaca: `npm run vercel-build`.
+3. Pastikan Output Directory = `dist`.
+4. Gunakan tombol **Redeploy** lalu centang **Use existing Build Cache: OFF** (clear cache).
+5. Cek log build harus memuat baris `vite build` dan `dist/assets/...`.
+
+Catatan: foto custom untuk latar/galeri harus ada di folder `static/images` sesuai panduan di `static/images/README.md`.
+
 ## 🔐 Demo Login Admin
 
 - **Email**: admin@rqsyababulkhair.id
