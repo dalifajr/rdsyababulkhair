@@ -1,60 +1,95 @@
 import { useState } from 'react'
-import { Save, User, BookOpen, Target, Eye, Phone, Mail, MapPin } from 'lucide-react'
+import { Save, User, BookOpen, Target, Phone, Mail, MapPin, PlusCircle, Pencil, Trash2, X } from 'lucide-react'
+import {
+  getProfileData,
+  getProfileElements,
+  saveProfileData,
+  saveProfileElements,
+} from '../../data/siteContent'
 
 const ManageProfile = () => {
   const [activeTab, setActiveTab] = useState('info')
   const [isSaving, setIsSaving] = useState(false)
   const [savedMessage, setSavedMessage] = useState('')
+  const [elementForm, setElementForm] = useState({ id: null, title: '', description: '' })
 
-  const [profileData, setProfileData] = useState({
-    nama: 'Rumah Quran Syababul Khair',
-    deskripsi: 'Tempat belajar Al-Quran dengan metode yang mudah dan menyenangkan. Membentuk generasi Qurani yang berakhlak mulia.',
-    pimpinan: 'Ust. Muhammad Iqbal, S.Pd',
-    sambutan: `Assalamu'alaikum Warahmatullahi Wabarakatuh,
-
-Alhamdulillah, segala puji bagi Allah SWT yang telah memberikan kita kesempatan untuk terus mendekat kepada-Nya melalui Al-Quran. Shalawat dan salam semoga senantiasa tercurah kepada baginda Nabi Muhammad SAW.
-
-Rumah Quran Syababul Khair hadir dengan sebuah misi suci: membentuk generasi muda yang mencintai Al-Quran, menghafalnya, dan mengamalkannya dalam kehidupan sehari-hari. Kami percaya bahwa setiap anak memiliki potensi luar biasa untuk menjadi penghafal dan pengamal Al-Quran.
-
-Dengan dukungan orang tua, para pengajar yang kompeten, dan lingkungan yang kondusif, InsyaAllah kita bersama-sama dapat mewujudkan generasi Qurani yang menjadi kebanggaan umat dan penyejuk hati orang tua.
-
-Mari bergabung bersama kami dalam perjalanan mulia ini. Jadikan Al-Quran sebagai sahabat terbaik dalam kehidupan.
-
-Wassalamu'alaikum Warahmatullahi Wabarakatuh.`,
-    visi: 'Menjadi lembaga pendidikan Al-Quran terdepan yang melahirkan generasi Qurani, berakhlak mulia, cinta Al-Quran, dan menjadi penerang bagi umat',
-    misi: [
-      'Menyelenggarakan pendidikan Al-Quran dengan metode yang efektif dan menyenangkan',
-      'Membina santri agar mampu membaca Al-Quran dengan baik dan benar sesuai kaidah tajwid',
-      'Menumbuhkan kecintaan terhadap Al-Quran dan semangat untuk menghafalnya',
-      'Membentuk karakter santri yang berakhlak mulia sesuai tuntunan Islam',
-      'Menciptakan lingkungan belajar yang kondusif, nyaman, dan Islami',
-      'Menyiapkan generasi muda yang siap menjadi pemimpin umat yang amanah'
-    ],
-    telepon: '+62 812-3456-7890',
-    email: 'info@rqsyababulkhair.id',
-    alamat: 'https://maps.app.goo.gl/Nup11EjQLmr9x5uh7',
-    jadwal: 'Senin - Jumat: 16:00 - 18:00, Sabtu - Minggu: 08:00 - 10:00'
-  })
+  const [profileData, setProfileData] = useState(getProfileData())
+  const [profileElements, setProfileElements] = useState(getProfileElements())
 
   const handleSave = async () => {
     setIsSaving(true)
-    // Simulate API call
+    saveProfileData(profileData)
+    saveProfileElements(profileElements)
     await new Promise(resolve => setTimeout(resolve, 1500))
     setIsSaving(false)
     setSavedMessage('Perubahan berhasil disimpan!')
     setTimeout(() => setSavedMessage(''), 3000)
   }
 
+  const handleElementSubmit = (e) => {
+    e.preventDefault()
+
+    if (!elementForm.title.trim() || !elementForm.description.trim()) {
+      return
+    }
+
+    if (elementForm.id) {
+      setProfileElements((prev) =>
+        prev.map((item) =>
+          item.id === elementForm.id
+            ? {
+                ...item,
+                title: elementForm.title.trim(),
+                description: elementForm.description.trim(),
+              }
+            : item,
+        ),
+      )
+    } else {
+      setProfileElements((prev) => [
+        ...prev,
+        {
+          id: Date.now(),
+          title: elementForm.title.trim(),
+          description: elementForm.description.trim(),
+        },
+      ])
+    }
+
+    setElementForm({ id: null, title: '', description: '' })
+  }
+
+  const handleElementEdit = (item) => {
+    setElementForm({
+      id: item.id,
+      title: item.title,
+      description: item.description,
+    })
+  }
+
+  const handleElementDelete = (id) => {
+    if (window.confirm('Yakin ingin menghapus elemen profil ini?')) {
+      setProfileElements((prev) => prev.filter((item) => item.id !== id))
+      if (elementForm.id === id) {
+        setElementForm({ id: null, title: '', description: '' })
+      }
+    }
+  }
+
+  const resetElementForm = () => {
+    setElementForm({ id: null, title: '', description: '' })
+  }
+
   const tabs = [
     { id: 'info', label: 'Informasi Umum', icon: User },
     { id: 'visi-misi', label: 'Visi & Misi', icon: Target },
     { id: 'sambutan', label: 'Sambutan', icon: BookOpen },
+    { id: 'elemen', label: 'Elemen Profil', icon: PlusCircle },
     { id: 'kontak', label: 'Kontak', icon: Phone },
   ]
 
   return (
     <div className="space-y-6">
-      {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">Profil Website</h1>
@@ -83,14 +118,12 @@ Wassalamu'alaikum Warahmatullahi Wabarakatuh.`,
         </button>
       </div>
 
-      {/* Success Message */}
       {savedMessage && (
         <div className="p-4 bg-green-50 text-green-700 rounded-xl">
           {savedMessage}
         </div>
       )}
 
-      {/* Tabs */}
       <div className="bg-white rounded-2xl shadow-sm">
         <div className="border-b">
           <div className="flex overflow-x-auto">
@@ -115,7 +148,6 @@ Wassalamu'alaikum Warahmatullahi Wabarakatuh.`,
         </div>
 
         <div className="p-6">
-          {/* Informasi Umum */}
           {activeTab === 'info' && (
             <div className="space-y-6">
               <div>
@@ -154,7 +186,6 @@ Wassalamu'alaikum Warahmatullahi Wabarakatuh.`,
             </div>
           )}
 
-          {/* Visi & Misi */}
           {activeTab === 'visi-misi' && (
             <div className="space-y-6">
               <div>
@@ -182,7 +213,6 @@ Wassalamu'alaikum Warahmatullahi Wabarakatuh.`,
             </div>
           )}
 
-          {/* Sambutan */}
           {activeTab === 'sambutan' && (
             <div className="space-y-6">
               <div>
@@ -199,7 +229,98 @@ Wassalamu'alaikum Warahmatullahi Wabarakatuh.`,
             </div>
           )}
 
-          {/* Kontak */}
+          {activeTab === 'elemen' && (
+            <div className="space-y-8">
+              <form onSubmit={handleElementSubmit} className="grid md:grid-cols-2 gap-6 bg-gray-50 rounded-2xl p-6">
+                <div className="md:col-span-2">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-1">
+                    {elementForm.id ? 'Edit Elemen Profil' : 'Tambah Elemen Profil'}
+                  </h3>
+                  <p className="text-sm text-gray-600">Elemen ini tampil pada halaman Profil publik.</p>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Judul Elemen
+                  </label>
+                  <input
+                    type="text"
+                    value={elementForm.title}
+                    onChange={(e) => setElementForm({ ...elementForm, title: e.target.value })}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-teal-500 outline-none"
+                    placeholder="Contoh: Program Unggulan"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Deskripsi Singkat
+                  </label>
+                  <input
+                    type="text"
+                    value={elementForm.description}
+                    onChange={(e) => setElementForm({ ...elementForm, description: e.target.value })}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-teal-500 outline-none"
+                    placeholder="Contoh: Tahsin, Tahfidz, dan adab"
+                  />
+                </div>
+
+                <div className="md:col-span-2 flex gap-3">
+                  <button
+                    type="submit"
+                    className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-teal-600 text-white font-semibold hover:bg-teal-700 transition-colors"
+                  >
+                    <PlusCircle size={18} />
+                    {elementForm.id ? 'Update Elemen' : 'Tambah Elemen'}
+                  </button>
+                  {elementForm.id && (
+                    <button
+                      type="button"
+                      onClick={resetElementForm}
+                      className="inline-flex items-center gap-2 px-5 py-3 rounded-xl border border-gray-300 text-gray-700 font-semibold hover:bg-gray-100 transition-colors"
+                    >
+                      <X size={18} />
+                      Batal Edit
+                    </button>
+                  )}
+                </div>
+              </form>
+
+              <div className="space-y-4">
+                {profileElements.map((item) => (
+                  <div key={item.id} className="border border-gray-200 rounded-2xl p-5 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                    <div>
+                      <h4 className="font-semibold text-gray-900">{item.title}</h4>
+                      <p className="text-gray-600 text-sm mt-1">{item.description}</p>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={() => handleElementEdit(item)}
+                        className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-amber-500 text-white hover:bg-amber-600 transition-colors"
+                      >
+                        <Pencil size={16} />
+                        Edit
+                      </button>
+                      <button
+                        onClick={() => handleElementDelete(item.id)}
+                        className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-red-500 text-white hover:bg-red-600 transition-colors"
+                      >
+                        <Trash2 size={16} />
+                        Hapus
+                      </button>
+                    </div>
+                  </div>
+                ))}
+
+                {profileElements.length === 0 && (
+                  <div className="text-center py-10 border border-dashed border-gray-300 rounded-2xl text-gray-500">
+                    Belum ada elemen profil. Tambahkan elemen baru melalui form di atas.
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
           {activeTab === 'kontak' && (
             <div className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">

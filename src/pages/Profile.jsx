@@ -1,14 +1,15 @@
-import { Users, Award, BookOpen, Heart, GraduationCap, Star } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import { Users, Award, BookOpen, Heart, Star } from 'lucide-react'
+import { defaultProfileData, defaultProfileElements, getProfileData, getProfileElements } from '../data/siteContent'
 
 const Profile = () => {
-  const leaders = [
-    {
-      name: 'Ust. Muhammad Iqbal, S.Pd',
-      position: 'Pimpinan Yayasan',
-      description: 'Lulusan S1 Pendidikan Islam dengan pengalaman lebih dari 10 tahun dalam pengajaran Al-Quran.',
-      icon: GraduationCap
-    }
-  ]
+  const [profileData, setProfileData] = useState(defaultProfileData)
+  const [profileElements, setProfileElements] = useState(defaultProfileElements)
+
+  useEffect(() => {
+    setProfileData(getProfileData())
+    setProfileElements(getProfileElements())
+  }, [])
 
   const teachers = [
     { name: 'Ustadz Ahmad Fadil', specialty: 'Tahfidz & Tajwid' },
@@ -19,58 +20,55 @@ const Profile = () => {
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="gradient-primary py-20 pattern-islamic">
+      <section
+        className="relative py-24 bg-cover bg-center"
+        style={{ backgroundImage: "url('/images/bg/rq-syababul-khair-hero.jpg')" }}
+      >
+        <div className="absolute inset-0 bg-teal-950/75"></div>
+        <div className="absolute inset-0 pattern-islamic"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center text-white">
+          <div className="relative z-10 text-center text-white">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Profil Yayasan</h1>
             <p className="text-xl text-teal-100 max-w-2xl mx-auto">
-              Mengenal lebih dekat Rumah Quran Syababul Khair dan orang-orang di baliknya
+              Mengenal lebih dekat {profileData.nama} dan orang-orang di baliknya
             </p>
           </div>
         </div>
       </section>
 
-      {/* About Organization */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <span className="text-teal-600 font-semibold">Tentang Kami</span>
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-2 mb-6">
-                Rumah Quran Syababul Khair
+                {profileData.nama}
               </h2>
               <div className="space-y-4 text-gray-600 leading-relaxed">
                 <p>
-                  <strong className="text-gray-900">Rumah Quran Syababul Khair</strong> adalah lembaga pendidikan 
-                  Al-Quran yang didirikan dengan tujuan mulia untuk membentuk generasi Qurani yang 
+                  <strong className="text-gray-900">{profileData.nama}</strong> adalah lembaga pendidikan
+                  Al-Quran yang didirikan dengan tujuan mulia untuk membentuk generasi Qurani yang
                   mencintai Al-Quran dan mengamalkannya dalam kehidupan sehari-hari.
                 </p>
                 <p>
-                  Nama "Syababul Khair" berarti "Pemuda yang Baik", mencerminkan harapan kami untuk 
-                  mencetak generasi muda yang tidak hanya fasih membaca Al-Quran, tetapi juga 
-                  memiliki akhlak yang mulia sesuai tuntunan Rasulullah SAW.
+                  {profileData.deskripsi}
                 </p>
                 <p>
-                  Dengan tenaga pengajar yang kompeten dan metode pembelajaran yang terstruktur, 
+                  Dengan tenaga pengajar yang kompeten dan metode pembelajaran yang terstruktur,
                   kami berkomitmen untuk memberikan pendidikan Al-Quran terbaik bagi seluruh santri.
                 </p>
               </div>
             </div>
             <div className="bg-gradient-to-br from-teal-100 to-teal-50 rounded-3xl p-8">
               <div className="grid grid-cols-2 gap-6">
-                {[
-                  { icon: BookOpen, title: 'Program Lengkap', desc: 'Tahsin, Tahfidz, Kajian' },
-                  { icon: Users, title: 'Pengajar Profesional', desc: 'Bersertifikat & Berpengalaman' },
-                  { icon: Heart, title: 'Lingkungan Islami', desc: 'Kondusif & Nyaman' },
-                  { icon: Award, title: 'Metode Teruji', desc: 'Efektif & Menyenangkan' },
-                ].map((item, index) => {
-                  const Icon = item.icon
+                {profileElements.map((item, index) => {
+                  const iconSet = [BookOpen, Users, Heart, Award]
+                  const Icon = iconSet[index % iconSet.length]
                   return (
                     <div key={index} className="bg-white p-6 rounded-xl card-shadow">
                       <Icon className="text-teal-600 mb-3" size={32} />
-                      <h4 className="font-semibold text-gray-900 mb-1">{item.title}</h4>
-                      <p className="text-sm text-gray-600">{item.desc}</p>
+                      <h4 className="font-semibold text-gray-900 mb-1">{item.title || 'Elemen Profil'}</h4>
+                      <p className="text-sm text-gray-600">{item.description || '-'}</p>
                     </div>
                   )
                 })}
@@ -80,7 +78,6 @@ const Profile = () => {
         </div>
       </section>
 
-      {/* Leader Section - Sambutan Pimpinan */}
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -98,39 +95,14 @@ const Profile = () => {
                     <Users className="text-white" size={64} />
                   </div>
                   <div className="text-center mt-4">
-                    <h3 className="font-bold text-xl text-gray-900">Ust. Muhammad Iqbal, S.Pd</h3>
+                    <h3 className="font-bold text-xl text-gray-900">{profileData.pimpinan}</h3>
                     <p className="text-teal-600">Pimpinan Yayasan</p>
                   </div>
                 </div>
                 <div className="flex-1">
                   <div className="text-5xl text-teal-200 mb-4">"</div>
-                  <div className="space-y-4 text-gray-600 leading-relaxed italic">
-                    <p>
-                      Assalamu'alaikum Warahmatullahi Wabarakatuh,
-                    </p>
-                    <p>
-                      Alhamdulillah, segala puji bagi Allah SWT yang telah memberikan kita kesempatan 
-                      untuk terus mendekat kepada-Nya melalui Al-Quran. Shalawat dan salam semoga 
-                      senantiasa tercurah kepada baginda Nabi Muhammad SAW.
-                    </p>
-                    <p>
-                      Rumah Quran Syababul Khair hadir dengan sebuah misi suci: membentuk generasi 
-                      muda yang mencintai Al-Quran, menghafalnya, dan mengamalkannya dalam kehidupan 
-                      sehari-hari. Kami percaya bahwa setiap anak memiliki potensi luar biasa untuk 
-                      menjadi penghafal dan pengamal Al-Quran.
-                    </p>
-                    <p>
-                      Dengan dukungan orang tua, para pengajar yang kompeten, dan lingkungan yang 
-                      kondusif, InsyaAllah kita bersama-sama dapat mewujudkan generasi Qurani yang 
-                      menjadi kebanggaan umat dan penyejuk hati orang tua.
-                    </p>
-                    <p>
-                      Mari bergabung bersama kami dalam perjalanan mulia ini. Jadikan Al-Quran sebagai 
-                      sahabat terbaik dalam kehidupan.
-                    </p>
-                    <p className="font-semibold text-teal-700">
-                      Wassalamu'alaikum Warahmatullahi Wabarakatuh.
-                    </p>
+                  <div className="space-y-4 text-gray-600 leading-relaxed italic whitespace-pre-line">
+                    {profileData.sambutan}
                   </div>
                 </div>
               </div>
@@ -139,7 +111,6 @@ const Profile = () => {
         </div>
       </section>
 
-      {/* Teachers Section */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -165,7 +136,6 @@ const Profile = () => {
         </div>
       </section>
 
-      {/* Sejarah Section */}
       <section className="py-20 gradient-primary pattern-islamic">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center text-white">

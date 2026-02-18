@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { BookOpen, Users, Award, Heart, ArrowRight, MapPin, Calendar, Star } from 'lucide-react'
 import Logo from '../components/Logo'
+import { defaultGalleryImages } from '../data/siteContent'
 
 const Home = () => {
   const features = [
@@ -53,10 +54,14 @@ const Home = () => {
 
   return (
     <div className="overflow-hidden">
-      {/* Hero Section */}
-      <section className="relative gradient-primary min-h-[90vh] flex items-center pattern-islamic">
+      <section
+        className="relative min-h-[90vh] flex items-center bg-cover bg-center"
+        style={{ backgroundImage: "url('/images/bg/rq-syababul-khair-hero.jpg')" }}
+      >
+        <div className="absolute inset-0 bg-teal-950/75"></div>
+        <div className="absolute inset-0 pattern-islamic"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="relative z-10 grid lg:grid-cols-2 gap-12 items-center">
             <div className="text-white animate-fadeInUp">
               <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm rounded-full px-4 py-2 mb-6">
                 <Star className="text-amber-400" size={16} />
@@ -100,6 +105,23 @@ const Home = () => {
           <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="white"/>
           </svg>
+        </div>
+      </section>
+
+      <section className="py-10 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {defaultGalleryImages.slice(0, 4).map((image) => (
+              <div key={image.id} className="rounded-2xl overflow-hidden card-shadow bg-white">
+                <img
+                  src={image.src}
+                  alt={image.title}
+                  className="w-full h-40 object-cover"
+                  loading="lazy"
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 

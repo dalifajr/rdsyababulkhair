@@ -1,75 +1,72 @@
+import { useId } from 'react'
+
 const Logo = ({ size = 60, className = '' }) => {
+  const id = useId().replace(/:/g, '')
+  const emerald = `emerald-${id}`
+  const gold = `gold-${id}`
+  const soft = `soft-${id}`
+
   return (
     <svg
       width={size}
       height={size}
-      viewBox="0 0 100 100"
+      viewBox="0 0 120 120"
       className={className}
       xmlns="http://www.w3.org/2000/svg"
     >
-      {/* Outer circle with gradient */}
       <defs>
-        <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <linearGradient id={emerald} x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stopColor="#0d9488" />
           <stop offset="100%" stopColor="#065f5b" />
         </linearGradient>
-        <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <linearGradient id={gold} x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stopColor="#d4af37" />
-          <stop offset="100%" stopColor="#b8960d" />
+          <stop offset="100%" stopColor="#d4af37" />
         </linearGradient>
+        <radialGradient id={soft} cx="50%" cy="35%" r="70%">
+          <stop offset="0%" stopColor="#ffffff" stopOpacity="0.2" />
+          <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
+        </radialGradient>
       </defs>
-      
-      {/* Main circle background */}
-      <circle cx="50" cy="50" r="48" fill="url(#logoGradient)" />
-      
-      {/* Inner decorative ring */}
-      <circle cx="50" cy="50" r="42" fill="none" stroke="url(#goldGradient)" strokeWidth="2" />
-      
-      {/* Quran/Book symbol */}
-      <g transform="translate(50, 50)">
-        {/* Book base */}
-        <path
-          d="M-20 -5 L-20 20 Q0 25 20 20 L20 -5 Q0 0 -20 -5Z"
-          fill="#ffffff"
-          opacity="0.95"
-        />
-        {/* Book spine */}
-        <line x1="0" y1="-5" x2="0" y2="22" stroke="url(#goldGradient)" strokeWidth="2" />
-        {/* Left page lines */}
-        <line x1="-15" y1="2" x2="-3" y2="4" stroke="#0d9488" strokeWidth="1.5" opacity="0.6" />
-        <line x1="-15" y1="8" x2="-3" y2="10" stroke="#0d9488" strokeWidth="1.5" opacity="0.6" />
-        <line x1="-15" y1="14" x2="-3" y2="16" stroke="#0d9488" strokeWidth="1.5" opacity="0.6" />
-        {/* Right page lines */}
-        <line x1="15" y1="2" x2="3" y2="4" stroke="#0d9488" strokeWidth="1.5" opacity="0.6" />
-        <line x1="15" y1="8" x2="3" y2="10" stroke="#0d9488" strokeWidth="1.5" opacity="0.6" />
-        <line x1="15" y1="14" x2="3" y2="16" stroke="#0d9488" strokeWidth="1.5" opacity="0.6" />
-      </g>
-      
-      {/* Crescent moon symbol */}
-      <g transform="translate(50, 25)">
-        <path
-          d="M0 -12 A10 10 0 1 1 0 8 A7 7 0 1 0 0 -12"
-          fill="url(#goldGradient)"
-        />
-        {/* Star */}
-        <polygon
-          points="12,-2 13.5,2 18,2 14.5,5 16,9 12,6.5 8,9 9.5,5 6,2 10.5,2"
-          fill="url(#goldGradient)"
-          transform="scale(0.6)"
-        />
-      </g>
-      
-      {/* Text: RQ */}
+
+      <circle cx="60" cy="60" r="56" fill={`url(#${emerald})`} />
+      <circle cx="60" cy="60" r="56" fill={`url(#${soft})`} />
+      <circle cx="60" cy="60" r="49" fill="none" stroke={`url(#${gold})`} strokeWidth="2.6" />
+
+      <path
+        d="M28 71V52c0-16 12-28 32-28s32 12 32 28v19"
+        fill="none"
+        stroke={`url(#${gold})`}
+        strokeWidth="4"
+        strokeLinecap="round"
+      />
+      <path
+        d="M36 70h48v10c0 2-2 4-4 4H40c-2 0-4-2-4-4V70z"
+        fill="#ffffff"
+        opacity="0.95"
+      />
+      <path d="M60 40a10 10 0 1 1 0 20 7 7 0 1 0 0-20z" fill={`url(#${gold})`} />
+      <circle cx="70" cy="46" r="1.8" fill={`url(#${gold})`} />
+
+      <path d="M43 66v14c5-2 11-2 17 0V66c-6-2-12-2-17 0z" fill="#ffffff" opacity="0.96" />
+      <path d="M60 66v14c6-2 12-2 17 0V66c-5-2-11-2-17 0z" fill="#f6fffd" opacity="0.96" />
+      <line x1="60" y1="66" x2="60" y2="80" stroke={`url(#${gold})`} strokeWidth="1.8" />
+      <line x1="48" y1="71" x2="56" y2="71" stroke="#0d9488" strokeWidth="1" opacity="0.6" />
+      <line x1="48" y1="75" x2="56" y2="75" stroke="#0d9488" strokeWidth="1" opacity="0.6" />
+      <line x1="64" y1="71" x2="72" y2="71" stroke="#0d9488" strokeWidth="1" opacity="0.6" />
+      <line x1="64" y1="75" x2="72" y2="75" stroke="#0d9488" strokeWidth="1" opacity="0.6" />
+
       <text
-        x="50"
-        y="75"
+        x="60"
+        y="96"
         textAnchor="middle"
         fill="#ffffff"
-        fontSize="12"
-        fontWeight="bold"
-        fontFamily="Arial, sans-serif"
+        fontSize="9"
+        fontWeight="700"
+        letterSpacing="0.6"
+        fontFamily="Segoe UI, sans-serif"
       >
-        SYABABUL KHAIR
+        RQ SYABABUL KHAIR
       </text>
     </svg>
   )
