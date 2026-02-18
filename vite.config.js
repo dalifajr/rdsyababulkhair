@@ -7,6 +7,7 @@ export default defineConfig({
     react(),
     tailwindcss()
   ],
+  publicDir: 'static',
   build: {
     outDir: 'dist',
     emptyOutDir: true
