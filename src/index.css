@@ -1,0 +1,87 @@
+@import "tailwindcss";
+
+:root {
+  --primary-green: #0d9488;
+  --primary-gold: #d4af37;
+  --dark-green: #065f5b;
+  --light-green: #ccfbf1;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.gradient-primary {
+  background: linear-gradient(135deg, #0d9488 0%, #065f5b 100%);
+}
+
+.gradient-gold {
+  background: linear-gradient(135deg, #d4af37 0%, #b8960d 100%);
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, #0d9488 0%, #065f5b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.arabic-text {
+  font-family: 'Traditional Arabic', 'Amiri', serif;
+  direction: rtl;
+}
+
+.card-shadow {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.card-shadow-hover:hover {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  transform: translateY(-2px);
+  transition: all 0.3s ease;
+}
+
+.pattern-islamic {
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%230d9488' fill-opacity='0.05'%3E%3Cpath d='M30 30L0 0h60L30 30zm0 0L0 60h60L30 30z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* Animation classes */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(13, 148, 136, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(13, 148, 136, 0.8);
+  }
+}
+
+.pulse-glow {
+  animation: pulse-glow 2s infinite;
+}

@@ -1,0 +1,196 @@
+import { Users, Award, BookOpen, Heart, GraduationCap, Star } from 'lucide-react'
+
+const Profile = () => {
+  const leaders = [
+    {
+      name: 'Ust. Muhammad Iqbal, S.Pd',
+      position: 'Pimpinan Yayasan',
+      description: 'Lulusan S1 Pendidikan Islam dengan pengalaman lebih dari 10 tahun dalam pengajaran Al-Quran.',
+      icon: GraduationCap
+    }
+  ]
+
+  const teachers = [
+    { name: 'Ustadz Ahmad Fadil', specialty: 'Tahfidz & Tajwid' },
+    { name: 'Ustadzah Siti Aminah', specialty: 'Tahsin Anak-anak' },
+    { name: 'Ustadz Muhammad Rizki', specialty: 'Qiroah & Tilawah' },
+    { name: 'Ustadzah Nurul Hidayah', specialty: 'Tahsin Pemula' },
+  ]
+
+  return (
+    <div className="min-h-screen">
+      {/* Hero Section */}
+      <section className="gradient-primary py-20 pattern-islamic">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center text-white">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">Profil Yayasan</h1>
+            <p className="text-xl text-teal-100 max-w-2xl mx-auto">
+              Mengenal lebih dekat Rumah Quran Syababul Khair dan orang-orang di baliknya
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* About Organization */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <span className="text-teal-600 font-semibold">Tentang Kami</span>
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-2 mb-6">
+                Rumah Quran Syababul Khair
+              </h2>
+              <div className="space-y-4 text-gray-600 leading-relaxed">
+                <p>
+                  <strong className="text-gray-900">Rumah Quran Syababul Khair</strong> adalah lembaga pendidikan 
+                  Al-Quran yang didirikan dengan tujuan mulia untuk membentuk generasi Qurani yang 
+                  mencintai Al-Quran dan mengamalkannya dalam kehidupan sehari-hari.
+                </p>
+                <p>
+                  Nama "Syababul Khair" berarti "Pemuda yang Baik", mencerminkan harapan kami untuk 
+                  mencetak generasi muda yang tidak hanya fasih membaca Al-Quran, tetapi juga 
+                  memiliki akhlak yang mulia sesuai tuntunan Rasulullah SAW.
+                </p>
+                <p>
+                  Dengan tenaga pengajar yang kompeten dan metode pembelajaran yang terstruktur, 
+                  kami berkomitmen untuk memberikan pendidikan Al-Quran terbaik bagi seluruh santri.
+                </p>
+              </div>
+            </div>
+            <div className="bg-gradient-to-br from-teal-100 to-teal-50 rounded-3xl p-8">
+              <div className="grid grid-cols-2 gap-6">
+                {[
+                  { icon: BookOpen, title: 'Program Lengkap', desc: 'Tahsin, Tahfidz, Kajian' },
+                  { icon: Users, title: 'Pengajar Profesional', desc: 'Bersertifikat & Berpengalaman' },
+                  { icon: Heart, title: 'Lingkungan Islami', desc: 'Kondusif & Nyaman' },
+                  { icon: Award, title: 'Metode Teruji', desc: 'Efektif & Menyenangkan' },
+                ].map((item, index) => {
+                  const Icon = item.icon
+                  return (
+                    <div key={index} className="bg-white p-6 rounded-xl card-shadow">
+                      <Icon className="text-teal-600 mb-3" size={32} />
+                      <h4 className="font-semibold text-gray-900 mb-1">{item.title}</h4>
+                      <p className="text-sm text-gray-600">{item.desc}</p>
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Leader Section - Sambutan Pimpinan */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Sambutan Pimpinan Yayasan
+            </h2>
+            <div className="w-24 h-1 bg-amber-400 mx-auto"></div>
+          </div>
+          
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-white rounded-3xl p-8 md:p-12 card-shadow">
+              <div className="flex flex-col md:flex-row items-center gap-8">
+                <div className="flex-shrink-0">
+                  <div className="w-40 h-40 gradient-primary rounded-full flex items-center justify-center">
+                    <Users className="text-white" size={64} />
+                  </div>
+                  <div className="text-center mt-4">
+                    <h3 className="font-bold text-xl text-gray-900">Ust. Muhammad Iqbal, S.Pd</h3>
+                    <p className="text-teal-600">Pimpinan Yayasan</p>
+                  </div>
+                </div>
+                <div className="flex-1">
+                  <div className="text-5xl text-teal-200 mb-4">"</div>
+                  <div className="space-y-4 text-gray-600 leading-relaxed italic">
+                    <p>
+                      Assalamu'alaikum Warahmatullahi Wabarakatuh,
+                    </p>
+                    <p>
+                      Alhamdulillah, segala puji bagi Allah SWT yang telah memberikan kita kesempatan 
+                      untuk terus mendekat kepada-Nya melalui Al-Quran. Shalawat dan salam semoga 
+                      senantiasa tercurah kepada baginda Nabi Muhammad SAW.
+                    </p>
+                    <p>
+                      Rumah Quran Syababul Khair hadir dengan sebuah misi suci: membentuk generasi 
+                      muda yang mencintai Al-Quran, menghafalnya, dan mengamalkannya dalam kehidupan 
+                      sehari-hari. Kami percaya bahwa setiap anak memiliki potensi luar biasa untuk 
+                      menjadi penghafal dan pengamal Al-Quran.
+                    </p>
+                    <p>
+                      Dengan dukungan orang tua, para pengajar yang kompeten, dan lingkungan yang 
+                      kondusif, InsyaAllah kita bersama-sama dapat mewujudkan generasi Qurani yang 
+                      menjadi kebanggaan umat dan penyejuk hati orang tua.
+                    </p>
+                    <p>
+                      Mari bergabung bersama kami dalam perjalanan mulia ini. Jadikan Al-Quran sebagai 
+                      sahabat terbaik dalam kehidupan.
+                    </p>
+                    <p className="font-semibold text-teal-700">
+                      Wassalamu'alaikum Warahmatullahi Wabarakatuh.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Teachers Section */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Tim Pengajar Kami
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Para ustadz dan ustadzah yang kompeten dan berdedikasi tinggi dalam mengajarkan Al-Quran
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {teachers.map((teacher, index) => (
+              <div key={index} className="bg-gray-50 rounded-2xl p-6 text-center card-shadow-hover transition-all duration-300">
+                <div className="w-20 h-20 bg-gradient-to-br from-teal-500 to-teal-600 rounded-full mx-auto mb-4 flex items-center justify-center">
+                  <Star className="text-white" size={32} />
+                </div>
+                <h3 className="font-semibold text-lg text-gray-900 mb-1">{teacher.name}</h3>
+                <p className="text-teal-600 text-sm">{teacher.specialty}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Sejarah Section */}
+      <section className="py-20 gradient-primary pattern-islamic">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center text-white">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">Sejarah Singkat</h2>
+            <div className="max-w-3xl mx-auto space-y-6 text-teal-50 leading-relaxed">
+              <p>
+                Rumah Quran Syababul Khair berdiri pada tahun 2019 atas inisiatif Ust. Muhammad Iqbal, S.Pd 
+                bersama beberapa tokoh masyarakat yang prihatin akan minimnya wadah pendidikan Al-Quran 
+                bagi anak-anak di lingkungan sekitar.
+              </p>
+              <p>
+                Berawal dari kegiatan mengaji kecil dengan beberapa santri, kini Rumah Quran Syababul Khair 
+                telah berkembang menjadi lembaga pendidikan Al-Quran yang dipercaya oleh banyak orang tua 
+                untuk mendidik putra-putri mereka dalam hal keagamaan.
+              </p>
+              <p>
+                Dengan semangat yang tidak pernah padam dan dukungan dari berbagai pihak, kami terus 
+                berkomitmen untuk mencetak generasi Qurani yang berakhlak mulia.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  )
+}
+
+export default Profile
