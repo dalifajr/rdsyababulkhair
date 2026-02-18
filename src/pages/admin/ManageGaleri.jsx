@@ -1,15 +1,13 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Plus, Trash2, Search, X, Upload, Image as ImageIcon } from 'lucide-react'
+import { getGalleryImages, saveGalleryImages } from '../../data/siteContent'
 
 const ManageGaleri = () => {
-  const [photos, setPhotos] = useState([
-    { id: 1, title: 'Kegiatan Mengaji Rutin', category: 'Kegiatan Mengaji', date: '2024-12-15' },
-    { id: 2, title: 'Wisuda Santri 2024', category: 'Wisuda', date: '2024-12-10' },
-    { id: 3, title: 'Lomba Tahfidz', category: 'Lomba', date: '2024-12-05' },
-    { id: 4, title: 'Kegiatan Outdoor', category: 'Kegiatan Outdoor', date: '2024-11-20' },
-    { id: 5, title: 'Belajar Tahsin', category: 'Kegiatan Mengaji', date: '2024-11-15' },
-    { id: 6, title: 'Foto Bersama Wisuda', category: 'Wisuda', date: '2024-12-10' },
-  ])
+  const [photos, setPhotos] = useState([])
+
+  useEffect(() => {
+    setPhotos(getGalleryImages())
+  }, [])
 
   const [showModal, setShowModal] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
@@ -17,6 +15,7 @@ const ManageGaleri = () => {
   const [formData, setFormData] = useState({
     title: '',
     category: '',
+    description: '',
     file: null
   })
 
@@ -24,20 +23,34 @@ const ManageGaleri = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+
+    // In a real app, we would upload the file to a server here.
+    // For this mock, we'll pretend it's uploaded and use a placeholder path if a file was selected.
+    // Or we could use URL.createObjectURL for temporary preview, but that won't persist well in LS strings.
+    // Let's stick to a generic placeholder for new uploads in this offline-ish mode.
+
     const newPhoto = {
       id: Date.now(),
       title: formData.title,
       category: formData.category,
-      date: new Date().toISOString().split('T')[0]
+      description: formData.description,
+      date: new Date().toISOString().split('T')[0],
+      src: '/images/galeri/placeholder.jpg' // Default placeholder for new uploads
     }
-    setPhotos([newPhoto, ...photos])
+
+    const updatedPhotos = [newPhoto, ...photos]
+    setPhotos(updatedPhotos)
+    saveGalleryImages(updatedPhotos)
+
     setShowModal(false)
-    setFormData({ title: '', category: '', file: null })
+    setFormData({ title: '', category: '', description: '', file: null })
   }
 
   const handleDelete = (id) => {
     if (window.confirm('Apakah Anda yakin ingin menghapus foto ini?')) {
-      setPhotos(photos.filter(p => p.id !== id))
+      const updatedPhotos = photos.filter(p => p.id !== id)
+      setPhotos(updatedPhotos)
+      saveGalleryImages(updatedPhotos)
     }
   }
 
@@ -82,11 +95,10 @@ const ManageGaleri = () => {
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                  selectedCategory === cat
+                className={`px-4 py-2 rounded-lg font-medium transition-colors ${selectedCategory === cat
                     ? 'bg-teal-600 text-white'
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }`}
+                  }`}
               >
                 {cat}
               </button>
@@ -100,9 +112,16 @@ const ManageGaleri = () => {
         {filteredPhotos.map((photo) => (
           <div key={photo.id} className="bg-white rounded-2xl overflow-hidden shadow-sm group">
             <div className="aspect-square bg-gradient-to-br from-teal-100 to-teal-200 relative">
-              <div className="absolute inset-0 flex items-center justify-center">
+              <img
+                src={photo.src}
+                alt={photo.title}
+                className="w-full h-full object-cover"
+                onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex' }}
+              />
+              <div className="absolute inset-0 hidden items-center justify-center">
                 <ImageIcon className="text-teal-400" size={48} />
               </div>
+
               {/* Overlay on hover */}
               <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                 <button
@@ -151,7 +170,7 @@ const ManageGaleri = () => {
                 <input
                   type="text"
                   value={formData.title}
-                  onChange={(e) => setFormData({...formData, title: e.target.value})}
+                  onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                   required
                   className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-teal-500 outline-none"
                   placeholder="Masukkan judul foto"
@@ -164,7 +183,7 @@ const ManageGaleri = () => {
                 </label>
                 <select
                   value={formData.category}
-                  onChange={(e) => setFormData({...formData, category: e.target.value})}
+                  onChange={(e) => setFormData({ ...formData, category: e.target.value })}
                   required
                   className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-teal-500 outline-none"
                 >
@@ -173,6 +192,19 @@ const ManageGaleri = () => {
                     <option key={cat} value={cat}>{cat}</option>
                   ))}
                 </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Deskripsi
+                </label>
+                <textarea
+                  value={formData.description}
+                  onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                  rows={3}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-teal-500 outline-none resize-none"
+                  placeholder="Deskripsi singkat foto..."
+                />
               </div>
 
               <div>
@@ -186,7 +218,7 @@ const ManageGaleri = () => {
                   <input
                     type="file"
                     accept="image/*"
-                    onChange={(e) => setFormData({...formData, file: e.target.files[0]})}
+                    onChange={(e) => setFormData({ ...formData, file: e.target.files[0] })}
                     className="hidden"
                     id="photo-upload"
                   />

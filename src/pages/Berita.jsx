@@ -1,80 +1,35 @@
-import { useState } from 'react'
-import { Calendar, User, ArrowRight, Clock, Tag } from 'lucide-react'
+import { useState, useEffect } from 'react'
+import { Calendar, User, ArrowRight, Clock } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import { getNewsItems } from '../data/siteContent'
 
 const Berita = () => {
   const [selectedCategory, setSelectedCategory] = useState('Semua')
+  const [newsItems, setNewsItems] = useState([])
+
+  useEffect(() => {
+    // Load published news items
+    const allNews = getNewsItems()
+    setNewsItems(allNews.filter(item => item.status === 'Published'))
+  }, [])
 
   const categories = ['Semua', 'Kegiatan', 'Pengumuman', 'Prestasi', 'Tips']
-
-  const newsItems = [
-    {
-      id: 1,
-      title: 'Wisuda Santri Angkatan ke-5 Rumah Quran Syababul Khair',
-      excerpt: 'Alhamdulillah, pada hari Minggu (15/12/2024) telah dilaksanakan wisuda santri angkatan ke-5 dengan jumlah 25 santri yang telah berhasil menghafal Juz 30.',
-      category: 'Kegiatan',
-      date: '2024-12-16',
-      author: 'Admin',
-      readTime: '5 menit'
-    },
-    {
-      id: 2,
-      title: 'Pembukaan Pendaftaran Santri Baru Tahun 2025',
-      excerpt: 'Rumah Quran Syababul Khair membuka pendaftaran santri baru untuk tahun ajaran 2025. Pendaftaran dibuka mulai tanggal 1 Januari 2025.',
-      category: 'Pengumuman',
-      date: '2024-12-10',
-      author: 'Admin',
-      readTime: '3 menit'
-    },
-    {
-      id: 3,
-      title: 'Santri RQ Syababul Khair Raih Juara 1 Lomba MTQ Tingkat Kecamatan',
-      excerpt: 'Membanggakan! Adik Muhammad Hafiz, santri RQ Syababul Khair berhasil meraih juara 1 dalam lomba MTQ cabang Tahfidz tingkat kecamatan.',
-      category: 'Prestasi',
-      date: '2024-12-05',
-      author: 'Admin',
-      readTime: '4 menit'
-    },
-    {
-      id: 4,
-      title: '5 Tips Efektif Menghafal Al-Quran untuk Anak-anak',
-      excerpt: 'Menghafal Al-Quran membutuhkan metode yang tepat terutama untuk anak-anak. Berikut adalah tips-tips yang bisa diterapkan untuk memudahkan proses hafalan.',
-      category: 'Tips',
-      date: '2024-11-28',
-      author: 'Ust. Ahmad',
-      readTime: '7 menit'
-    },
-    {
-      id: 5,
-      title: 'Kegiatan Pesantren Kilat Ramadhan 1445 H',
-      excerpt: 'Rangkaian kegiatan pesantren kilat selama bulan Ramadhan 1445 H telah sukses diselenggarakan dengan diikuti oleh lebih dari 50 santri.',
-      category: 'Kegiatan',
-      date: '2024-04-15',
-      author: 'Admin',
-      readTime: '6 menit'
-    },
-    {
-      id: 6,
-      title: 'Jadwal Libur dan Kegiatan Akhir Tahun 2024',
-      excerpt: 'Pengumuman mengenai jadwal libur akhir tahun dan rangkaian kegiatan yang akan diadakan menjelang tahun baru 2025.',
-      category: 'Pengumuman',
-      date: '2024-12-01',
-      author: 'Admin',
-      readTime: '2 menit'
-    }
-  ]
 
   const filteredNews = selectedCategory === 'Semua'
     ? newsItems
     : newsItems.filter(item => item.category === selectedCategory)
 
   const formatDate = (dateString) => {
-    const date = new Date(dateString)
-    return date.toLocaleDateString('id-ID', {
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric'
-    })
+    try {
+      const date = new Date(dateString)
+      return date.toLocaleDateString('id-ID', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+      })
+    } catch {
+      return dateString
+    }
   }
 
   const getCategoryColor = (category) => {
@@ -109,11 +64,10 @@ const Berita = () => {
               <button
                 key={category}
                 onClick={() => setSelectedCategory(category)}
-                className={`px-6 py-2 rounded-full font-medium transition-all ${
-                  selectedCategory === category
+                className={`px-6 py-2 rounded-full font-medium transition-all ${selectedCategory === category
                     ? 'bg-teal-600 text-white'
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }`}
+                  }`}
               >
                 {category}
               </button>
@@ -127,7 +81,7 @@ const Berita = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {filteredNews.length > 0 ? (
             <>
-              {/* Featured Post */}
+              {/* Featured Post (First Item) */}
               <div className="mb-12">
                 <div className="bg-white rounded-3xl card-shadow overflow-hidden">
                   <div className="grid md:grid-cols-2">
@@ -165,40 +119,42 @@ const Berita = () => {
               </div>
 
               {/* Other Posts */}
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {filteredNews.slice(1).map((news) => (
-                  <article key={news.id} className="bg-white rounded-2xl card-shadow card-shadow-hover overflow-hidden transition-all duration-300">
-                    <div className="bg-gradient-to-br from-teal-50 to-teal-100 p-8 flex items-center justify-center">
-                      <div className="text-teal-300 text-4xl">📄</div>
-                    </div>
-                    <div className="p-6">
-                      <div className="flex items-center gap-4 mb-4">
-                        <span className={`px-3 py-1 rounded-full text-xs font-medium ${getCategoryColor(news.category)}`}>
-                          {news.category}
-                        </span>
-                        <span className="text-gray-400 text-sm">
-                          {formatDate(news.date)}
-                        </span>
+              {filteredNews.length > 1 && (
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {filteredNews.slice(1).map((news) => (
+                    <article key={news.id} className="bg-white rounded-2xl card-shadow card-shadow-hover overflow-hidden transition-all duration-300">
+                      <div className="bg-gradient-to-br from-teal-50 to-teal-100 p-8 flex items-center justify-center">
+                        <div className="text-teal-300 text-4xl">📄</div>
                       </div>
-                      <h3 className="text-lg font-bold text-gray-900 mb-3 line-clamp-2">
-                        {news.title}
-                      </h3>
-                      <p className="text-gray-600 text-sm mb-4 line-clamp-3">
-                        {news.excerpt}
-                      </p>
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-2 text-sm text-gray-500">
-                          <User size={14} />
-                          {news.author}
+                      <div className="p-6">
+                        <div className="flex items-center gap-4 mb-4">
+                          <span className={`px-3 py-1 rounded-full text-xs font-medium ${getCategoryColor(news.category)}`}>
+                            {news.category}
+                          </span>
+                          <span className="text-gray-400 text-sm">
+                            {formatDate(news.date)}
+                          </span>
                         </div>
-                        <button className="text-teal-600 hover:text-teal-700 font-medium text-sm flex items-center gap-1">
-                          Baca <ArrowRight size={14} />
-                        </button>
+                        <h3 className="text-lg font-bold text-gray-900 mb-3 line-clamp-2">
+                          {news.title}
+                        </h3>
+                        <p className="text-gray-600 text-sm mb-4 line-clamp-3">
+                          {news.excerpt}
+                        </p>
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-2 text-sm text-gray-500">
+                            <User size={14} />
+                            {news.author}
+                          </div>
+                          <button className="text-teal-600 hover:text-teal-700 font-medium text-sm flex items-center gap-1">
+                            Baca <ArrowRight size={14} />
+                          </button>
+                        </div>
                       </div>
-                    </div>
-                  </article>
-                ))}
-              </div>
+                    </article>
+                  ))}
+                </div>
+              )}
             </>
           ) : (
             <div className="text-center py-20">

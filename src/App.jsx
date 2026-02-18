@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import ScrollToTop from './components/ScrollToTop'
 import Layout from './components/Layout'
 import Home from './pages/Home'
 import Profile from './pages/Profile'
@@ -20,6 +21,7 @@ import ManagePendaftaran from './pages/admin/ManagePendaftaran'
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <Routes>
         {/* Public Routes */}
         <Route path="/" element={<Layout />}>
@@ -33,7 +35,7 @@ function App() {
           <Route path="berita" element={<Berita />} />
           <Route path="kontak" element={<Kontak />} />
         </Route>
-        
+
         {/* Admin Routes */}
         <Route path="/admin/login" element={<Login />} />
         <Route path="/admin" element={<AdminLayout />}>

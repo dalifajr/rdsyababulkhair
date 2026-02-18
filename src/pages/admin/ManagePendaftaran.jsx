@@ -1,59 +1,13 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Search, Eye, Check, X, Download, Filter } from 'lucide-react'
+import { getRegistrations, saveRegistrations } from '../../data/siteContent'
 
 const ManagePendaftaran = () => {
-  const [registrations, setRegistrations] = useState([
-    {
-      id: 1,
-      namaSantri: 'Ahmad Fadlan',
-      namaOrtu: 'Budi Santoso',
-      telepon: '081234567890',
-      email: 'budi@email.com',
-      program: 'Tahsin Anak-anak',
-      tanggalDaftar: '2024-12-18',
-      status: 'Baru'
-    },
-    {
-      id: 2,
-      namaSantri: 'Siti Aisyah',
-      namaOrtu: 'Ahmad Fauzi',
-      telepon: '081234567891',
-      email: 'ahmad@email.com',
-      program: 'Tahfidz',
-      tanggalDaftar: '2024-12-17',
-      status: 'Proses'
-    },
-    {
-      id: 3,
-      namaSantri: 'Muhammad Rizki',
-      namaOrtu: 'Hasan Abdullah',
-      telepon: '081234567892',
-      email: 'hasan@email.com',
-      program: 'Kelas Iqro',
-      tanggalDaftar: '2024-12-16',
-      status: 'Diterima'
-    },
-    {
-      id: 4,
-      namaSantri: 'Fatimah Zahra',
-      namaOrtu: 'Umar Faruq',
-      telepon: '081234567893',
-      email: 'umar@email.com',
-      program: 'Tahsin Remaja',
-      tanggalDaftar: '2024-12-15',
-      status: 'Diterima'
-    },
-    {
-      id: 5,
-      namaSantri: 'Abdullah Rahman',
-      namaOrtu: 'Yusuf Ibrahim',
-      telepon: '081234567894',
-      email: 'yusuf@email.com',
-      program: 'Tahfidz',
-      tanggalDaftar: '2024-12-14',
-      status: 'Ditolak'
-    }
-  ])
+  const [registrations, setRegistrations] = useState([])
+
+  useEffect(() => {
+    setRegistrations(getRegistrations())
+  }, [])
 
   const [showDetail, setShowDetail] = useState(null)
   const [searchQuery, setSearchQuery] = useState('')
@@ -62,17 +16,22 @@ const ManagePendaftaran = () => {
   const statuses = ['Semua', 'Baru', 'Proses', 'Diterima', 'Ditolak']
 
   const updateStatus = (id, newStatus) => {
-    setRegistrations(registrations.map(r =>
+    const updatedRegistrations = registrations.map(r =>
       r.id === id ? { ...r, status: newStatus } : r
-    ))
+    )
+    setRegistrations(updatedRegistrations)
+    saveRegistrations(updatedRegistrations)
   }
 
   const filteredRegistrations = registrations.filter(r => {
     const matchesSearch = r.namaSantri.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                          r.namaOrtu.toLowerCase().includes(searchQuery.toLowerCase())
+      r.namaOrtu.toLowerCase().includes(searchQuery.toLowerCase())
     const matchesStatus = filterStatus === 'Semua' || r.status === filterStatus
     return matchesSearch && matchesStatus
   })
+
+  // Sort by newest first
+  filteredRegistrations.sort((a, b) => new Date(b.tanggalDaftar) - new Date(a.tanggalDaftar))
 
   const getStatusColor = (status) => {
     const colors = {
@@ -89,7 +48,7 @@ const ManagePendaftaran = () => {
     const data = filteredRegistrations.map(r => [
       r.namaSantri, r.namaOrtu, r.telepon, r.email, r.program, r.tanggalDaftar, r.status
     ])
-    
+
     const csvContent = [headers, ...data].map(row => row.join(',')).join('\n')
     const blob = new Blob([csvContent], { type: 'text/csv' })
     const url = window.URL.createObjectURL(blob)
@@ -152,11 +111,10 @@ const ManagePendaftaran = () => {
               <button
                 key={status}
                 onClick={() => setFilterStatus(status)}
-                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                  filterStatus === status
+                className={`px-4 py-2 rounded-lg font-medium transition-colors ${filterStatus === status
                     ? 'bg-teal-600 text-white'
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }`}
+                  }`}
               >
                 {status}
               </button>
@@ -284,6 +242,22 @@ const ManagePendaftaran = () => {
                   <label className="text-sm text-gray-500">Tanggal Pendaftaran</label>
                   <p className="font-medium text-gray-900">{showDetail.tanggalDaftar}</p>
                 </div>
+                {/* Display extra details if available */}
+                {showDetail.details && (
+                  <>
+                    <div className="col-span-2 mt-2 pt-2 border-t">
+                      <h4 className="font-semibold mb-2">Data Lengkap</h4>
+                    </div>
+                    <div>
+                      <label className="text-sm text-gray-500">Tempat, Tanggal Lahir</label>
+                      <p className="text-sm">{showDetail.details.tempatLahir}, {showDetail.details.tanggalLahir}</p>
+                    </div>
+                    <div>
+                      <label className="text-sm text-gray-500">Alamat</label>
+                      <p className="text-sm">{showDetail.details.alamat}</p>
+                    </div>
+                  </>
+                )}
               </div>
 
               <div className="pt-4 border-t flex gap-3">

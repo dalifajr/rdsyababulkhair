@@ -72,7 +72,7 @@ const Home = () => {
                 <span className="text-amber-400">Syababul Khair</span>
               </h1>
               <p className="text-xl text-teal-50 mb-8 leading-relaxed">
-                Membentuk generasi Qurani yang cinta Al-Quran, berakhlak mulia, 
+                Membentuk generasi Qurani yang cinta Al-Quran, berakhlak mulia,
                 dan menjadi kebanggaan umat. Mari bergabung bersama kami!
               </p>
               <div className="flex flex-wrap gap-4">
@@ -99,11 +99,11 @@ const Home = () => {
             </div>
           </div>
         </div>
-        
+
         {/* Decorative Wave */}
         <div className="absolute bottom-0 left-0 right-0">
           <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="white"/>
+            <path d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="white" />
           </svg>
         </div>
       </section>
@@ -196,16 +196,16 @@ const Home = () => {
                   <em>Assalamu'alaikum Warahmatullahi Wabarakatuh,</em>
                 </p>
                 <p>
-                  Segala puji bagi Allah SWT yang telah memberikan kita kesempatan untuk terus mendekat kepada-Nya 
+                  Segala puji bagi Allah SWT yang telah memberikan kita kesempatan untuk terus mendekat kepada-Nya
                   melalui Al-Quran. Shalawat dan salam semoga tercurah kepada Nabi Muhammad SAW.
                 </p>
                 <p>
-                  Rumah Quran Syababul Khair hadir sebagai wadah bagi generasi muda untuk belajar dan mencintai 
-                  Al-Quran. Kami percaya bahwa setiap anak memiliki potensi luar biasa untuk menjadi penghafal 
+                  Rumah Quran Syababul Khair hadir sebagai wadah bagi generasi muda untuk belajar dan mencintai
+                  Al-Quran. Kami percaya bahwa setiap anak memiliki potensi luar biasa untuk menjadi penghafal
                   dan pengamal Al-Quran.
                 </p>
                 <p>
-                  Mari bergabung bersama kami dalam perjalanan mulia ini. Jadikan Al-Quran sebagai sahabat 
+                  Mari bergabung bersama kami dalam perjalanan mulia ini. Jadikan Al-Quran sebagai sahabat
                   terbaik dalam kehidupan.
                 </p>
                 <p className="font-semibold text-teal-700">
@@ -267,7 +267,7 @@ const Home = () => {
                 Kunjungi Rumah Quran Syababul Khair
               </h2>
               <p className="text-gray-600 mb-8 leading-relaxed">
-                Kami berlokasi di tempat yang strategis dan mudah dijangkau. 
+                Kami berlokasi di tempat yang strategis dan mudah dijangkau.
                 Datang dan kunjungi kami untuk melihat langsung kegiatan pembelajaran kami.
               </p>
               <div className="space-y-4">
@@ -303,7 +303,7 @@ const Home = () => {
             </div>
             <div className="bg-gray-100 rounded-3xl overflow-hidden card-shadow h-96">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.0!2d106.0!3d-6.0!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwMDAnMDAuMCJTIDEwNsKwMDAnMDAuMCJF!5e0!3m2!1sen!2sid!4v1"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3982.5!2d104.8250119!3d-3.0559892!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e3b9dc9729d1b81%3A0x482ca8c781d80889!2sRumah%20Qur'an%20Syababul%20Khair!5e0!3m2!1sid!2sid!4v1"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}

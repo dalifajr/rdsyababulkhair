@@ -1,49 +1,44 @@
+import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { Users, FileText, Image, ClipboardList, TrendingUp, Eye, Calendar, ArrowUpRight } from 'lucide-react'
+import { getNewsItems, getGalleryImages, getRegistrations } from '../../data/siteContent'
 
 const Dashboard = () => {
-  const stats = [
-    { 
-      title: 'Total Santri', 
-      value: '156', 
-      change: '+12%', 
-      icon: Users, 
-      color: 'bg-teal-500' 
-    },
-    { 
-      title: 'Berita Dipublish', 
-      value: '24', 
-      change: '+3', 
-      icon: FileText, 
-      color: 'bg-amber-500' 
-    },
-    { 
-      title: 'Foto di Galeri', 
-      value: '86', 
-      change: '+15', 
-      icon: Image, 
-      color: 'bg-green-500' 
-    },
-    { 
-      title: 'Pendaftar Baru', 
-      value: '8', 
-      change: 'Bulan ini', 
-      icon: ClipboardList, 
-      color: 'bg-blue-500' 
-    },
-  ]
+  const [stats, setStats] = useState([
+    { title: 'Total Santri', value: '156', change: '+12%', icon: Users, color: 'bg-teal-500' },
+    { title: 'Berita Dipublish', value: '0', change: '0', icon: FileText, color: 'bg-amber-500' },
+    { title: 'Foto di Galeri', value: '0', change: '0', icon: Image, color: 'bg-green-500' },
+    { title: 'Pendaftar Baru', value: '0', change: 'Bulan ini', icon: ClipboardList, color: 'bg-blue-500' },
+  ])
+  const [recentRegistrations, setRecentRegistrations] = useState([])
+  const [recentNews, setRecentNews] = useState([])
 
-  const recentRegistrations = [
-    { name: 'Ahmad Fadlan', program: 'Tahsin Anak', date: '2024-12-18', status: 'Baru' },
-    { name: 'Siti Aisyah', program: 'Tahfidz', date: '2024-12-17', status: 'Proses' },
-    { name: 'Muhammad Rizki', program: 'Kelas Iqro', date: '2024-12-16', status: 'Diterima' },
-    { name: 'Fatimah Zahra', program: 'Tahsin Remaja', date: '2024-12-15', status: 'Diterima' },
-  ]
+  useEffect(() => {
+    // Fetch data from local storage
+    const news = getNewsItems()
+    const gallery = getGalleryImages()
+    const registrations = getRegistrations()
 
-  const recentNews = [
-    { title: 'Wisuda Santri Angkatan ke-5', date: '2024-12-16', views: 245 },
-    { title: 'Pembukaan Pendaftaran 2025', date: '2024-12-10', views: 189 },
-    { title: 'Juara 1 Lomba MTQ', date: '2024-12-05', views: 312 },
-  ]
+    // Calculate stats
+    const publishedNews = news.filter(n => n.status === 'Published')
+    const newRegistrations = registrations.filter(r => {
+      const regDate = new Date(r.tanggalDaftar)
+      const now = new Date()
+      return regDate.getMonth() === now.getMonth() && regDate.getFullYear() === now.getFullYear()
+    })
+
+    setStats(prev => [
+      prev[0], // Keep static santri count for now
+      { ...prev[1], value: publishedNews.length.toString(), change: `+${publishedNews.length}` },
+      { ...prev[2], value: gallery.length.toString(), change: `+${gallery.length}` },
+      { ...prev[3], value: newRegistrations.length.toString(), change: `${newRegistrations.length} Bulan ini` },
+    ])
+
+    // Get recent items
+    setRecentRegistrations(registrations.sort((a, b) => new Date(b.tanggalDaftar) - new Date(a.tanggalDaftar)).slice(0, 5))
+    setRecentNews(news.sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 3))
+
+  }, [])
 
   const getStatusColor = (status) => {
     const colors = {
@@ -88,9 +83,9 @@ const Dashboard = () => {
         <div className="lg:col-span-2 bg-white rounded-2xl p-6 shadow-sm">
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-lg font-bold text-gray-900">Pendaftaran Terbaru</h2>
-            <a href="/admin/pendaftaran" className="text-teal-600 hover:text-teal-700 text-sm font-medium flex items-center gap-1">
+            <Link to="/admin/pendaftaran" className="text-teal-600 hover:text-teal-700 text-sm font-medium flex items-center gap-1">
               Lihat Semua <ArrowUpRight size={14} />
-            </a>
+            </Link>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full">
@@ -103,20 +98,26 @@ const Dashboard = () => {
                 </tr>
               </thead>
               <tbody>
-                {recentRegistrations.map((reg, index) => (
-                  <tr key={index} className="border-b last:border-0 hover:bg-gray-50">
-                    <td className="py-3 px-4">
-                      <span className="font-medium text-gray-900">{reg.name}</span>
-                    </td>
-                    <td className="py-3 px-4 text-gray-600">{reg.program}</td>
-                    <td className="py-3 px-4 text-gray-600">{reg.date}</td>
-                    <td className="py-3 px-4">
-                      <span className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(reg.status)}`}>
-                        {reg.status}
-                      </span>
-                    </td>
+                {recentRegistrations.length > 0 ? (
+                  recentRegistrations.map((reg, index) => (
+                    <tr key={index} className="border-b last:border-0 hover:bg-gray-50">
+                      <td className="py-3 px-4">
+                        <span className="font-medium text-gray-900">{reg.namaSantri}</span>
+                      </td>
+                      <td className="py-3 px-4 text-gray-600">{reg.program}</td>
+                      <td className="py-3 px-4 text-gray-600">{reg.tanggalDaftar}</td>
+                      <td className="py-3 px-4">
+                        <span className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(reg.status)}`}>
+                          {reg.status}
+                        </span>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan="4" className="py-4 text-center text-gray-500">Belum ada pendaftaran</td>
                   </tr>
-                ))}
+                )}
               </tbody>
             </table>
           </div>
@@ -126,26 +127,30 @@ const Dashboard = () => {
         <div className="bg-white rounded-2xl p-6 shadow-sm">
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-lg font-bold text-gray-900">Berita Terbaru</h2>
-            <a href="/admin/berita" className="text-teal-600 hover:text-teal-700 text-sm font-medium flex items-center gap-1">
+            <Link to="/admin/berita" className="text-teal-600 hover:text-teal-700 text-sm font-medium flex items-center gap-1">
               Kelola <ArrowUpRight size={14} />
-            </a>
+            </Link>
           </div>
           <div className="space-y-4">
-            {recentNews.map((news, index) => (
-              <div key={index} className="p-4 bg-gray-50 rounded-xl">
-                <h4 className="font-medium text-gray-900 mb-2 line-clamp-2">{news.title}</h4>
-                <div className="flex items-center justify-between text-sm">
-                  <span className="text-gray-500 flex items-center gap-1">
-                    <Calendar size={14} />
-                    {news.date}
-                  </span>
-                  <span className="text-gray-500 flex items-center gap-1">
-                    <Eye size={14} />
-                    {news.views}
-                  </span>
+            {recentNews.length > 0 ? (
+              recentNews.map((news, index) => (
+                <div key={index} className="p-4 bg-gray-50 rounded-xl">
+                  <h4 className="font-medium text-gray-900 mb-2 line-clamp-2">{news.title}</h4>
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-gray-500 flex items-center gap-1">
+                      <Calendar size={14} />
+                      {news.date}
+                    </span>
+                    <span className="text-gray-500 flex items-center gap-1">
+                      <Eye size={14} />
+                      {news.views}
+                    </span>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))
+            ) : (
+              <p className="text-center text-gray-500 py-4">Belum ada berita</p>
+            )}
           </div>
         </div>
       </div>
@@ -162,14 +167,14 @@ const Dashboard = () => {
           ].map((action, index) => {
             const Icon = action.icon
             return (
-              <a
+              <Link
                 key={index}
-                href={action.href}
-                className={`p-6 rounded-xl flex flex-col items-center gap-3 transition-colors ${action.color}`}
+                to={action.href}
+                className={`p-6 rounded-xl flex flex-col items-center justify-center gap-3 transition-colors ${action.color}`}
               >
                 <Icon size={28} />
-                <span className="font-medium text-sm">{action.title}</span>
-              </a>
+                <span className="font-medium text-sm text-center">{action.title}</span>
+              </Link>
             )
           })}
         </div>

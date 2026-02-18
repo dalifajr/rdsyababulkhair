@@ -1,41 +1,13 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Plus, Edit, Trash2, Eye, Search, Filter, X, Save } from 'lucide-react'
+import { getNewsItems, saveNewsItems } from '../../data/siteContent'
 
 const ManageBerita = () => {
-  const [news, setNews] = useState([
-    {
-      id: 1,
-      title: 'Wisuda Santri Angkatan ke-5 Rumah Quran Syababul Khair',
-      category: 'Kegiatan',
-      status: 'Published',
-      date: '2024-12-16',
-      views: 245
-    },
-    {
-      id: 2,
-      title: 'Pembukaan Pendaftaran Santri Baru Tahun 2025',
-      category: 'Pengumuman',
-      status: 'Published',
-      date: '2024-12-10',
-      views: 189
-    },
-    {
-      id: 3,
-      title: 'Santri RQ Syababul Khair Raih Juara 1 Lomba MTQ',
-      category: 'Prestasi',
-      status: 'Published',
-      date: '2024-12-05',
-      views: 312
-    },
-    {
-      id: 4,
-      title: '5 Tips Efektif Menghafal Al-Quran untuk Anak-anak',
-      category: 'Tips',
-      status: 'Draft',
-      date: '2024-11-28',
-      views: 0
-    }
-  ])
+  const [news, setNews] = useState([])
+
+  useEffect(() => {
+    setNews(getNewsItems())
+  }, [])
 
   const [showModal, setShowModal] = useState(false)
   const [editingNews, setEditingNews] = useState(null)
@@ -55,7 +27,7 @@ const ManageBerita = () => {
       setFormData({
         title: newsItem.title,
         category: newsItem.category,
-        content: '',
+        content: newsItem.content || '',
         status: newsItem.status
       })
     } else {
@@ -77,29 +49,41 @@ const ManageBerita = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    
+
+    let updatedNewsList
     if (editingNews) {
-      setNews(news.map(n => 
-        n.id === editingNews.id 
-          ? { ...n, ...formData }
+      updatedNewsList = news.map(n =>
+        n.id === editingNews.id
+          ? {
+            ...n,
+            ...formData,
+            excerpt: formData.content.substring(0, 150) + '...' // Generate excerpt
+          }
           : n
-      ))
+      )
     } else {
       const newNews = {
         id: Date.now(),
         ...formData,
+        excerpt: formData.content.substring(0, 150) + '...',
         date: new Date().toISOString().split('T')[0],
-        views: 0
+        views: 0,
+        author: 'Admin',
+        readTime: '3 menit' // Placeholder logic
       }
-      setNews([newNews, ...news])
+      updatedNewsList = [newNews, ...news]
     }
-    
+
+    setNews(updatedNewsList)
+    saveNewsItems(updatedNewsList)
     handleCloseModal()
   }
 
   const handleDelete = (id) => {
     if (window.confirm('Apakah Anda yakin ingin menghapus berita ini?')) {
-      setNews(news.filter(n => n.id !== id))
+      const updatedNewsList = news.filter(n => n.id !== id)
+      setNews(updatedNewsList)
+      saveNewsItems(updatedNewsList)
     }
   }
 
@@ -108,8 +92,8 @@ const ManageBerita = () => {
   )
 
   const getStatusColor = (status) => {
-    return status === 'Published' 
-      ? 'bg-green-100 text-green-700' 
+    return status === 'Published'
+      ? 'bg-green-100 text-green-700'
       : 'bg-amber-100 text-amber-700'
   }
 
@@ -227,7 +211,7 @@ const ManageBerita = () => {
                 <input
                   type="text"
                   value={formData.title}
-                  onChange={(e) => setFormData({...formData, title: e.target.value})}
+                  onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                   required
                   className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-teal-500 outline-none"
                   placeholder="Masukkan judul berita"
@@ -241,7 +225,7 @@ const ManageBerita = () => {
                   </label>
                   <select
                     value={formData.category}
-                    onChange={(e) => setFormData({...formData, category: e.target.value})}
+                    onChange={(e) => setFormData({ ...formData, category: e.target.value })}
                     required
                     className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-teal-500 outline-none"
                   >
@@ -257,7 +241,7 @@ const ManageBerita = () => {
                   </label>
                   <select
                     value={formData.status}
-                    onChange={(e) => setFormData({...formData, status: e.target.value})}
+                    onChange={(e) => setFormData({ ...formData, status: e.target.value })}
                     className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-teal-500 outline-none"
                   >
                     <option value="Draft">Draft</option>
@@ -272,7 +256,7 @@ const ManageBerita = () => {
                 </label>
                 <textarea
                   value={formData.content}
-                  onChange={(e) => setFormData({...formData, content: e.target.value})}
+                  onChange={(e) => setFormData({ ...formData, content: e.target.value })}
                   rows={8}
                   className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-teal-500 outline-none resize-none"
                   placeholder="Tulis konten berita..."

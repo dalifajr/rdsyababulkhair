@@ -72,18 +72,18 @@ const Tentang = () => {
               </h2>
               <div className="space-y-4 text-gray-600 leading-relaxed">
                 <p>
-                  <strong className="text-gray-900">Rumah Quran Syababul Khair</strong> adalah lembaga pendidikan 
-                  non-formal yang fokus pada pengajaran Al-Quran dan pembinaan karakter Islami. Didirikan pada tahun 2019 
-                  oleh Ust. Muhammad Iqbal, S.Pd, lembaga ini lahir dari keprihatinan akan minimnya wadah pendidikan 
+                  <strong className="text-gray-900">Rumah Quran Syababul Khair</strong> adalah lembaga pendidikan
+                  non-formal yang fokus pada pengajaran Al-Quran dan pembinaan karakter Islami. Didirikan pada tahun 2019
+                  oleh Ust. Muhammad Iqbal, S.Pd, lembaga ini lahir dari keprihatinan akan minimnya wadah pendidikan
                   Al-Quran yang berkualitas di lingkungan sekitar.
                 </p>
                 <p>
-                  Nama "Syababul Khair" diambil dari bahasa Arab yang berarti "Pemuda yang Baik". Nama ini 
-                  mencerminkan visi kami untuk mencetak generasi muda yang tidak hanya mahir membaca Al-Quran 
+                  Nama "Syababul Khair" diambil dari bahasa Arab yang berarti "Pemuda yang Baik". Nama ini
+                  mencerminkan visi kami untuk mencetak generasi muda yang tidak hanya mahir membaca Al-Quran
                   tetapi juga berakhlak mulia sesuai tuntunan Rasulullah SAW.
                 </p>
                 <p>
-                  Dengan dukungan tenaga pengajar yang kompeten dan kurikulum yang terstruktur, kami berkomitmen 
+                  Dengan dukungan tenaga pengajar yang kompeten dan kurikulum yang terstruktur, kami berkomitmen
                   untuk memberikan pendidikan Al-Quran terbaik bagi seluruh santri dari berbagai usia.
                 </p>
               </div>
@@ -104,19 +104,18 @@ const Tentang = () => {
               Milestone penting dalam sejarah Rumah Quran Syababul Khair
             </p>
           </div>
-          
+
           <div className="max-w-4xl mx-auto">
             <div className="relative">
               {/* Timeline line */}
               <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-teal-200 hidden md:block"></div>
-              
+
               <div className="space-y-8">
                 {milestones.map((milestone, index) => (
-                  <div 
-                    key={index} 
-                    className={`flex flex-col md:flex-row gap-8 items-center ${
-                      index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
-                    }`}
+                  <div
+                    key={index}
+                    className={`flex flex-col md:flex-row gap-8 items-center ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
+                      }`}
                   >
                     <div className={`flex-1 ${index % 2 === 0 ? 'md:text-right' : 'md:text-left'}`}>
                       <div className="bg-white p-6 rounded-2xl card-shadow">
@@ -145,7 +144,7 @@ const Tentang = () => {
               </div>
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Pencapaian Kami</h2>
               <p className="text-gray-600 mb-8 leading-relaxed">
-                Alhamdulillah, dengan izin Allah SWT dan dukungan dari berbagai pihak, 
+                Alhamdulillah, dengan izin Allah SWT dan dukungan dari berbagai pihak,
                 Rumah Quran Syababul Khair telah mencapai berbagai pencapaian yang membanggakan.
               </p>
               <div className="space-y-4">
@@ -191,7 +190,7 @@ const Tentang = () => {
               Keunggulan yang membuat Rumah Quran Syababul Khair menjadi pilihan terbaik
             </p>
           </div>
-          
+
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
@@ -227,7 +226,7 @@ const Tentang = () => {
             ].map((item, index) => {
               const Icon = item.icon
               return (
-                <div 
+                <div
                   key={index}
                   className="bg-white/10 backdrop-blur-sm p-8 rounded-2xl text-white hover:bg-white/20 transition-all"
                 >
@@ -250,11 +249,11 @@ const Tentang = () => {
               Datang dan lihat langsung suasana pembelajaran di Rumah Quran Syababul Khair
             </p>
           </div>
-          
+
           <div className="max-w-4xl mx-auto">
             <div className="bg-gray-100 rounded-3xl overflow-hidden card-shadow h-96">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.0!2d106.0!3d-6.0!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwMDAnMDAuMCJTIDEwNsKwMDAnMDAuMCJF!5e0!3m2!1sen!2sid!4v1"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3982.5!2d104.8250119!3d-3.0559892!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e3b9dc9729d1b81%3A0x482ca8c781d80889!2sRumah%20Qur'an%20Syababul%20Khair!5e0!3m2!1sid!2sid!4v1"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}

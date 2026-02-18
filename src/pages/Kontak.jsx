@@ -23,10 +23,10 @@ const Kontak = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setIsSubmitting(true)
-    
+
     // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 1500))
-    
+
     setIsSubmitting(false)
     setIsSubmitted(true)
     setFormData({
@@ -59,7 +59,7 @@ const Kontak = () => {
             {/* Contact Info */}
             <div className="lg:col-span-1">
               <h2 className="text-2xl font-bold text-gray-900 mb-8">Informasi Kontak</h2>
-              
+
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 gradient-primary rounded-xl flex items-center justify-center flex-shrink-0">
@@ -67,7 +67,7 @@ const Kontak = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-1">Alamat</h3>
-                    <a 
+                    <a
                       href="https://maps.app.goo.gl/Nup11EjQLmr9x5uh7"
                       target="_blank"
                       rel="noopener noreferrer"
@@ -232,11 +232,10 @@ const Kontak = () => {
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className={`w-full inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-semibold text-white transition-all ${
-                        isSubmitting 
-                          ? 'bg-gray-400 cursor-not-allowed' 
+                      className={`w-full inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-semibold text-white transition-all ${isSubmitting
+                          ? 'bg-gray-400 cursor-not-allowed'
                           : 'bg-teal-600 hover:bg-teal-700'
-                      }`}
+                        }`}
                     >
                       {isSubmitting ? (
                         <>
@@ -265,10 +264,10 @@ const Kontak = () => {
             <h2 className="text-3xl font-bold text-gray-900 mb-4">Lokasi Kami</h2>
             <p className="text-gray-600">Kunjungi Rumah Quran Syababul Khair</p>
           </div>
-          
+
           <div className="bg-gray-100 rounded-3xl overflow-hidden card-shadow h-96">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.0!2d106.0!3d-6.0!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwMDAnMDAuMCJTIDEwNsKwMDAnMDAuMCJF!5e0!3m2!1sen!2sid!4v1"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3982.5!2d104.8250119!3d-3.0559892!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e3b9dc9729d1b81%3A0x482ca8c781d80889!2sRumah%20Qur'an%20Syababul%20Khair!5e0!3m2!1sid!2sid!4v1"
               width="100%"
               height="100%"
               style={{ border: 0 }}
@@ -278,7 +277,7 @@ const Kontak = () => {
               title="Lokasi Rumah Quran Syababul Khair"
             ></iframe>
           </div>
-          
+
           <div className="text-center mt-8">
             <a
               href="https://maps.app.goo.gl/Nup11EjQLmr9x5uh7"
