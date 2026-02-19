@@ -12,14 +12,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        // On Vercel, force certain configurations for serverless compatibility
+        // Force serverless-friendly configurations when running via api/index.php on Vercel
         if ($this->isVercel()) {
-            // Use array cache (in-memory, per-request) since there's no persistent filesystem
             config([
                 'cache.default' => 'array',
-                'session.driver' => 'cookie',
+                'session.driver' => 'array',
                 'logging.default' => 'stderr',
                 'view.compiled' => '/tmp/storage/framework/views',
+                'app.debug' => (bool) env('APP_DEBUG', false),
             ]);
         }
     }
