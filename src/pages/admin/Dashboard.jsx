@@ -5,118 +5,104 @@ import { getNewsItems, getGalleryImages, getRegistrations } from '../../data/sit
 
 const Dashboard = () => {
   const [stats, setStats] = useState([
-    { title: 'Total Santri', value: '156', change: '+12%', icon: Users, color: 'bg-teal-500' },
-    { title: 'Berita Dipublish', value: '0', change: '0', icon: FileText, color: 'bg-amber-500' },
-    { title: 'Foto di Galeri', value: '0', change: '0', icon: Image, color: 'bg-green-500' },
-    { title: 'Pendaftar Baru', value: '0', change: 'Bulan ini', icon: ClipboardList, color: 'bg-blue-500' },
+    { title: 'Total Santri', value: '156', change: '+12%', icon: Users, bg: 'var(--md-primary)', on: 'var(--md-on-primary)' },
+    { title: 'Berita Dipublish', value: '0', change: '0', icon: FileText, bg: 'var(--md-tertiary)', on: 'var(--md-on-tertiary)' },
+    { title: 'Foto di Galeri', value: '0', change: '0', icon: Image, bg: 'var(--md-secondary)', on: 'var(--md-on-secondary)' },
+    { title: 'Pendaftar Baru', value: '0', change: 'Bulan ini', icon: ClipboardList, bg: 'var(--md-primary)', on: 'var(--md-on-primary)' },
   ])
   const [recentRegistrations, setRecentRegistrations] = useState([])
   const [recentNews, setRecentNews] = useState([])
 
   useEffect(() => {
-    // Fetch data from local storage
     const news = getNewsItems()
     const gallery = getGalleryImages()
     const registrations = getRegistrations()
-
-    // Calculate stats
     const publishedNews = news.filter(n => n.status === 'Published')
     const newRegistrations = registrations.filter(r => {
-      const regDate = new Date(r.tanggalDaftar)
-      const now = new Date()
-      return regDate.getMonth() === now.getMonth() && regDate.getFullYear() === now.getFullYear()
+      const d = new Date(r.tanggalDaftar); const now = new Date()
+      return d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear()
     })
-
     setStats(prev => [
-      prev[0], // Keep static santri count for now
+      prev[0],
       { ...prev[1], value: publishedNews.length.toString(), change: `+${publishedNews.length}` },
       { ...prev[2], value: gallery.length.toString(), change: `+${gallery.length}` },
       { ...prev[3], value: newRegistrations.length.toString(), change: `${newRegistrations.length} Bulan ini` },
     ])
-
-    // Get recent items
     setRecentRegistrations(registrations.sort((a, b) => new Date(b.tanggalDaftar) - new Date(a.tanggalDaftar)).slice(0, 5))
     setRecentNews(news.sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 3))
-
   }, [])
 
-  const getStatusColor = (status) => {
-    const colors = {
-      'Baru': 'bg-blue-100 text-blue-700',
-      'Proses': 'bg-amber-100 text-amber-700',
-      'Diterima': 'bg-green-100 text-green-700',
-      'Ditolak': 'bg-red-100 text-red-700',
+  const getStatusStyle = (status) => {
+    const map = {
+      'Baru': { bg: 'var(--md-primary-container)', color: 'var(--md-on-primary-container)' },
+      'Proses': { bg: 'var(--md-tertiary-container)', color: 'var(--md-on-tertiary-container)' },
+      'Diterima': { bg: 'var(--md-secondary-container)', color: 'var(--md-on-secondary-container)' },
+      'Ditolak': { bg: 'var(--md-error-container)', color: 'var(--md-on-error-container)' },
     }
-    return colors[status] || 'bg-gray-100 text-gray-700'
+    return map[status] || { bg: 'var(--md-surface-container-high)', color: 'var(--md-on-surface-variant)' }
   }
 
   return (
     <div className="space-y-6">
-      {/* Header */}
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">Dashboard</h1>
-        <p className="text-gray-600">Selamat datang di Admin Panel RQ Syababul Khair</p>
+        <h1 className="text-2xl font-bold" style={{ color: 'var(--md-on-surface)' }}>Dashboard</h1>
+        <p style={{ color: 'var(--md-on-surface-variant)' }}>Selamat datang di Admin Panel RQ Syababul Khair</p>
       </div>
 
-      {/* Stats Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {/* M3 Stats Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {stats.map((stat, index) => {
           const Icon = stat.icon
           return (
-            <div key={index} className="bg-white rounded-2xl p-6 shadow-sm">
+            <div key={index} className="m3-card-elevated p-5">
               <div className="flex items-center justify-between mb-4">
-                <div className={`w-12 h-12 ${stat.color} rounded-xl flex items-center justify-center`}>
-                  <Icon className="text-white" size={24} />
+                <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ background: stat.bg, color: stat.on }}>
+                  <Icon size={24} />
                 </div>
-                <span className="text-sm text-green-600 font-medium">{stat.change}</span>
+                <span className="text-sm font-medium" style={{ color: 'var(--md-primary)' }}>{stat.change}</span>
               </div>
-              <h3 className="text-3xl font-bold text-gray-900">{stat.value}</h3>
-              <p className="text-gray-600 text-sm">{stat.title}</p>
+              <h3 className="text-3xl font-bold" style={{ color: 'var(--md-on-surface)' }}>{stat.value}</h3>
+              <p className="text-sm" style={{ color: 'var(--md-on-surface-variant)' }}>{stat.title}</p>
             </div>
           )
         })}
       </div>
 
-      {/* Main Content Grid */}
+      {/* Main Grid */}
       <div className="grid lg:grid-cols-3 gap-6">
         {/* Recent Registrations */}
-        <div className="lg:col-span-2 bg-white rounded-2xl p-6 shadow-sm">
+        <div className="lg:col-span-2 m3-card-elevated p-6">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-lg font-bold text-gray-900">Pendaftaran Terbaru</h2>
-            <Link to="/admin/pendaftaran" className="text-teal-600 hover:text-teal-700 text-sm font-medium flex items-center gap-1">
+            <h2 className="text-lg font-bold" style={{ color: 'var(--md-on-surface)' }}>Pendaftaran Terbaru</h2>
+            <Link to="/admin/pendaftaran" className="text-sm font-medium flex items-center gap-1" style={{ color: 'var(--md-primary)' }}>
               Lihat Semua <ArrowUpRight size={14} />
             </Link>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
-                <tr className="border-b">
-                  <th className="text-left py-3 px-4 text-sm font-semibold text-gray-600">Nama</th>
-                  <th className="text-left py-3 px-4 text-sm font-semibold text-gray-600">Program</th>
-                  <th className="text-left py-3 px-4 text-sm font-semibold text-gray-600">Tanggal</th>
-                  <th className="text-left py-3 px-4 text-sm font-semibold text-gray-600">Status</th>
+                <tr style={{ borderBottom: '1px solid var(--md-outline-variant)' }}>
+                  <th className="text-left py-3 px-4 text-sm font-semibold" style={{ color: 'var(--md-on-surface-variant)' }}>Nama</th>
+                  <th className="text-left py-3 px-4 text-sm font-semibold" style={{ color: 'var(--md-on-surface-variant)' }}>Program</th>
+                  <th className="text-left py-3 px-4 text-sm font-semibold" style={{ color: 'var(--md-on-surface-variant)' }}>Tanggal</th>
+                  <th className="text-left py-3 px-4 text-sm font-semibold" style={{ color: 'var(--md-on-surface-variant)' }}>Status</th>
                 </tr>
               </thead>
               <tbody>
-                {recentRegistrations.length > 0 ? (
-                  recentRegistrations.map((reg, index) => (
-                    <tr key={index} className="border-b last:border-0 hover:bg-gray-50">
+                {recentRegistrations.length > 0 ? recentRegistrations.map((reg, i) => {
+                  const s = getStatusStyle(reg.status)
+                  return (
+                    <tr key={i} style={{ borderBottom: '1px solid var(--md-outline-variant)' }}>
+                      <td className="py-3 px-4 font-medium" style={{ color: 'var(--md-on-surface)' }}>{reg.namaSantri}</td>
+                      <td className="py-3 px-4" style={{ color: 'var(--md-on-surface-variant)' }}>{reg.program}</td>
+                      <td className="py-3 px-4" style={{ color: 'var(--md-on-surface-variant)' }}>{reg.tanggalDaftar}</td>
                       <td className="py-3 px-4">
-                        <span className="font-medium text-gray-900">{reg.namaSantri}</span>
-                      </td>
-                      <td className="py-3 px-4 text-gray-600">{reg.program}</td>
-                      <td className="py-3 px-4 text-gray-600">{reg.tanggalDaftar}</td>
-                      <td className="py-3 px-4">
-                        <span className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(reg.status)}`}>
-                          {reg.status}
-                        </span>
+                        <span className="px-3 py-1 rounded-full text-xs font-medium" style={{ background: s.bg, color: s.color }}>{reg.status}</span>
                       </td>
                     </tr>
-                  ))
-                ) : (
-                  <tr>
-                    <td colSpan="4" className="py-4 text-center text-gray-500">Belum ada pendaftaran</td>
-                  </tr>
+                  )
+                }) : (
+                  <tr><td colSpan="4" className="py-4 text-center" style={{ color: 'var(--md-on-surface-variant)' }}>Belum ada pendaftaran</td></tr>
                 )}
               </tbody>
             </table>
@@ -124,54 +110,43 @@ const Dashboard = () => {
         </div>
 
         {/* Recent News */}
-        <div className="bg-white rounded-2xl p-6 shadow-sm">
+        <div className="m3-card-elevated p-6">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-lg font-bold text-gray-900">Berita Terbaru</h2>
-            <Link to="/admin/berita" className="text-teal-600 hover:text-teal-700 text-sm font-medium flex items-center gap-1">
+            <h2 className="text-lg font-bold" style={{ color: 'var(--md-on-surface)' }}>Berita Terbaru</h2>
+            <Link to="/admin/berita" className="text-sm font-medium flex items-center gap-1" style={{ color: 'var(--md-primary)' }}>
               Kelola <ArrowUpRight size={14} />
             </Link>
           </div>
           <div className="space-y-4">
-            {recentNews.length > 0 ? (
-              recentNews.map((news, index) => (
-                <div key={index} className="p-4 bg-gray-50 rounded-xl">
-                  <h4 className="font-medium text-gray-900 mb-2 line-clamp-2">{news.title}</h4>
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-gray-500 flex items-center gap-1">
-                      <Calendar size={14} />
-                      {news.date}
-                    </span>
-                    <span className="text-gray-500 flex items-center gap-1">
-                      <Eye size={14} />
-                      {news.views}
-                    </span>
-                  </div>
+            {recentNews.length > 0 ? recentNews.map((news, i) => (
+              <div key={i} className="p-4 rounded-xl" style={{ background: 'var(--md-surface-container-low)' }}>
+                <h4 className="font-medium mb-2 line-clamp-2" style={{ color: 'var(--md-on-surface)' }}>{news.title}</h4>
+                <div className="flex items-center justify-between text-sm" style={{ color: 'var(--md-on-surface-variant)' }}>
+                  <span className="flex items-center gap-1"><Calendar size={14} />{news.date}</span>
+                  <span className="flex items-center gap-1"><Eye size={14} />{news.views}</span>
                 </div>
-              ))
-            ) : (
-              <p className="text-center text-gray-500 py-4">Belum ada berita</p>
+              </div>
+            )) : (
+              <p className="text-center py-4" style={{ color: 'var(--md-on-surface-variant)' }}>Belum ada berita</p>
             )}
           </div>
         </div>
       </div>
 
       {/* Quick Actions */}
-      <div className="bg-white rounded-2xl p-6 shadow-sm">
-        <h2 className="text-lg font-bold text-gray-900 mb-6">Aksi Cepat</h2>
+      <div className="m3-card-elevated p-6">
+        <h2 className="text-lg font-bold mb-6" style={{ color: 'var(--md-on-surface)' }}>Aksi Cepat</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {[
-            { title: 'Tambah Berita', icon: FileText, href: '/admin/berita', color: 'bg-teal-50 text-teal-600 hover:bg-teal-100' },
-            { title: 'Upload Foto', icon: Image, href: '/admin/galeri', color: 'bg-amber-50 text-amber-600 hover:bg-amber-100' },
-            { title: 'Edit Profil', icon: Users, href: '/admin/profile', color: 'bg-green-50 text-green-600 hover:bg-green-100' },
-            { title: 'Lihat Pendaftar', icon: ClipboardList, href: '/admin/pendaftaran', color: 'bg-blue-50 text-blue-600 hover:bg-blue-100' },
-          ].map((action, index) => {
+            { title: 'Tambah Berita', icon: FileText, href: '/admin/berita', bg: 'var(--md-primary-container)', color: 'var(--md-on-primary-container)' },
+            { title: 'Upload Foto', icon: Image, href: '/admin/galeri', bg: 'var(--md-tertiary-container)', color: 'var(--md-on-tertiary-container)' },
+            { title: 'Edit Profil', icon: Users, href: '/admin/profile', bg: 'var(--md-secondary-container)', color: 'var(--md-on-secondary-container)' },
+            { title: 'Lihat Pendaftar', icon: ClipboardList, href: '/admin/pendaftaran', bg: 'var(--md-primary-container)', color: 'var(--md-on-primary-container)' },
+          ].map((action, i) => {
             const Icon = action.icon
             return (
-              <Link
-                key={index}
-                to={action.href}
-                className={`p-6 rounded-xl flex flex-col items-center justify-center gap-3 transition-colors ${action.color}`}
-              >
+              <Link key={i} to={action.href} className="p-6 rounded-2xl flex flex-col items-center justify-center gap-3 transition-all hover:scale-[1.02]"
+                style={{ background: action.bg, color: action.color }}>
                 <Icon size={28} />
                 <span className="font-medium text-sm text-center">{action.title}</span>
               </Link>

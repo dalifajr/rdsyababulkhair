@@ -7,7 +7,7 @@ import { defaultGalleryImages } from '../data/siteContent'
 const GalleryPreviewCard = ({ image }) => {
   const [failed, setFailed] = useState(false)
   return (
-    <div className="rounded-2xl overflow-hidden card-shadow card-shadow-hover bg-white">
+    <div className="m3-card-elevated overflow-hidden">
       {!failed ? (
         <img
           src={image.src}
@@ -18,7 +18,7 @@ const GalleryPreviewCard = ({ image }) => {
         />
       ) : (
         <div className="w-full h-40 md:h-48 img-fallback">
-          <ImageIcon className="text-teal-400" size={40} />
+          <ImageIcon size={40} style={{ color: 'var(--md-on-surface-variant)' }} />
         </div>
       )}
     </div>
@@ -27,26 +27,10 @@ const GalleryPreviewCard = ({ image }) => {
 
 const Home = () => {
   const features = [
-    {
-      icon: BookOpen,
-      title: 'Tahsin Al-Quran',
-      description: 'Belajar membaca Al-Quran dengan tajwid yang benar dan fasih'
-    },
-    {
-      icon: Users,
-      title: 'Pembelajaran Interaktif',
-      description: 'Metode belajar yang menyenangkan dengan pendekatan personal'
-    },
-    {
-      icon: Award,
-      title: 'Guru Berpengalaman',
-      description: 'Dibimbing oleh ustadz/ustadzah yang kompeten dan bersertifikat'
-    },
-    {
-      icon: Heart,
-      title: 'Pembinaan Akhlak',
-      description: 'Tidak hanya mengaji, tapi juga membentuk karakter Islami'
-    }
+    { icon: BookOpen, title: 'Tahsin Al-Quran', description: 'Belajar membaca Al-Quran dengan tajwid yang benar dan fasih' },
+    { icon: Users, title: 'Pembelajaran Interaktif', description: 'Metode belajar yang menyenangkan dengan pendekatan personal' },
+    { icon: Award, title: 'Guru Berpengalaman', description: 'Dibimbing oleh ustadz/ustadzah yang kompeten dan bersertifikat' },
+    { icon: Heart, title: 'Pembinaan Akhlak', description: 'Tidak hanya mengaji, tapi juga membentuk karakter Islami' }
   ]
 
   const stats = [
@@ -57,57 +41,51 @@ const Home = () => {
   ]
 
   const activities = [
-    {
-      title: 'Mengaji Rutin Harian',
-      description: 'Kegiatan mengaji setiap hari dengan metode klasikal dan individual',
-      image: '📖'
-    },
-    {
-      title: 'Hafalan Quran',
-      description: 'Program tahfidz untuk anak-anak yang ingin menghafal Al-Quran',
-      image: '🕌'
-    },
-    {
-      title: 'Kajian Islami',
-      description: 'Pembelajaran aqidah, fiqih, dan siroh nabawiyah',
-      image: '📚'
-    }
+    { title: 'Mengaji Rutin Harian', description: 'Kegiatan mengaji setiap hari dengan metode klasikal dan individual', image: '📖' },
+    { title: 'Hafalan Quran', description: 'Program tahfidz untuk anak-anak yang ingin menghafal Al-Quran', image: '🕌' },
+    { title: 'Kajian Islami', description: 'Pembelajaran aqidah, fiqih, dan siroh nabawiyah', image: '📚' }
   ]
 
   return (
     <div className="overflow-hidden">
+      {/* M3 Hero – Primary surface */}
       <section
-        className="relative min-h-[90vh] flex items-center bg-cover bg-center"
-        style={{ backgroundImage: "url('/images/bg/rq-syababul-khair-hero.svg')" }}
+        className="relative min-h-[90vh] flex items-center"
+        style={{ background: 'var(--md-primary)' }}
       >
-        <div className="absolute inset-0 bg-teal-950/60"></div>
         <div className="absolute inset-0 pattern-islamic"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="relative z-10 grid lg:grid-cols-2 gap-12 items-center">
-            <div className="text-white animate-fadeInUp">
-              <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm rounded-full px-4 py-2 mb-6">
-                <Star className="text-amber-400" size={16} />
-                <span className="text-sm">Tempat Belajar Al-Quran Terbaik</span>
+            <div className="animate-fadeInUp" style={{ color: 'var(--md-on-primary)' }}>
+              {/* M3 Assist Chip style badge */}
+              <div
+                className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-6 text-sm font-medium"
+                style={{ background: 'var(--md-primary-container)', color: 'var(--md-on-primary-container)' }}
+              >
+                <Star size={16} />
+                <span>Tempat Belajar Al-Quran Terbaik</span>
               </div>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
                 Rumah Quran<br />
-                <span className="text-amber-400">Syababul Khair</span>
+                <span style={{ color: 'var(--md-primary-container)' }}>Syababul Khair</span>
               </h1>
-              <p className="text-xl text-teal-50 mb-8 leading-relaxed">
+              <p className="text-xl mb-8 leading-relaxed opacity-90">
                 Membentuk generasi Qurani yang cinta Al-Quran, berakhlak mulia,
                 dan menjadi kebanggaan umat. Mari bergabung bersama kami!
               </p>
               <div className="flex flex-wrap gap-4">
                 <Link
                   to="/pendaftaran"
-                  className="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-600 text-white px-8 py-4 rounded-xl font-semibold transition-all hover:scale-105"
+                  className="inline-flex items-center gap-2 h-14 px-8 rounded-full text-base font-medium transition-all duration-200 hover:shadow-lg"
+                  style={{ background: 'var(--md-tertiary-container)', color: 'var(--md-on-tertiary-container)' }}
                 >
                   Daftar Sekarang
                   <ArrowRight size={20} />
                 </Link>
                 <Link
                   to="/tentang"
-                  className="inline-flex items-center gap-2 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white px-8 py-4 rounded-xl font-semibold transition-all"
+                  className="inline-flex items-center gap-2 h-14 px-8 rounded-full text-base font-medium transition-all duration-200 border-2"
+                  style={{ borderColor: 'var(--md-on-primary)', color: 'var(--md-on-primary)' }}
                 >
                   Pelajari Lebih Lanjut
                 </Link>
@@ -115,23 +93,25 @@ const Home = () => {
             </div>
             <div className="hidden lg:flex justify-center animate-fadeInUp">
               <div className="relative">
-                <div className="absolute inset-0 bg-amber-400 rounded-full blur-3xl opacity-20 scale-110"></div>
+                <div
+                  className="absolute inset-0 rounded-full blur-3xl opacity-20 scale-110"
+                  style={{ background: 'var(--md-primary-container)' }}
+                ></div>
                 <Logo size={350} className="relative z-10" />
               </div>
             </div>
           </div>
         </div>
-
-        {/* Decorative Wave */}
+        {/* Smooth wave transition */}
         <div className="absolute bottom-0 left-0 right-0">
           <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="#f9fafb" />
+            <path d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="var(--md-surface)" />
           </svg>
         </div>
       </section>
 
       {/* Gallery Preview Strip */}
-      <section className="py-12 bg-gray-50">
+      <section className="py-12" style={{ background: 'var(--md-surface)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
             {defaultGalleryImages.slice(0, 4).map((image) => (
@@ -141,45 +121,48 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="py-16 bg-white">
+      {/* Stats – M3 Filled Cards */}
+      <section className="py-16" style={{ background: 'var(--md-surface-container-lowest)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {stats.map((stat, index) => (
-              <div key={index} className="text-center p-6 bg-gradient-to-br from-teal-50 to-white rounded-2xl card-shadow card-shadow-hover">
-                <div className="text-4xl font-bold text-teal-600 mb-2">{stat.number}</div>
-                <div className="text-gray-600 font-medium">{stat.label}</div>
+              <div
+                key={index}
+                className="text-center p-6 rounded-xl transition-shadow hover:shadow-md"
+                style={{ background: 'var(--md-primary-container)', color: 'var(--md-on-primary-container)' }}
+              >
+                <div className="text-4xl font-bold mb-2">{stat.number}</div>
+                <div className="font-medium opacity-80">{stat.label}</div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className="py-20 bg-gray-50">
+      {/* Features – M3 Elevated Cards */}
+      <section className="py-20" style={{ background: 'var(--md-surface)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Mengapa Memilih <span className="text-gradient">Rumah Quran Syababul Khair?</span>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ color: 'var(--md-on-surface)' }}>
+              Mengapa Memilih <span style={{ color: 'var(--md-primary)' }}>Rumah Quran?</span>
             </h2>
-            <div className="section-divider mb-6"></div>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg max-w-2xl mx-auto" style={{ color: 'var(--md-on-surface-variant)' }}>
               Kami berkomitmen memberikan pendidikan Al-Quran terbaik dengan metode yang tepat dan lingkungan yang kondusif
             </p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {features.map((feature, index) => {
               const Icon = feature.icon
               return (
-                <div
-                  key={index}
-                  className="bg-white p-8 rounded-2xl card-shadow card-shadow-hover transition-all duration-300"
-                >
-                  <div className="w-14 h-14 gradient-primary rounded-xl flex items-center justify-center mb-6">
-                    <Icon className="text-white" size={28} />
+                <div key={index} className="m3-card-elevated p-6 transition-all duration-300">
+                  <div
+                    className="w-14 h-14 rounded-xl flex items-center justify-center mb-5"
+                    style={{ background: 'var(--md-primary)', color: 'var(--md-on-primary)' }}
+                  >
+                    <Icon size={28} />
                   </div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-3">{feature.title}</h3>
-                  <p className="text-gray-600">{feature.description}</p>
+                  <h3 className="text-lg font-medium mb-2" style={{ color: 'var(--md-on-surface)' }}>{feature.title}</h3>
+                  <p className="text-sm leading-relaxed" style={{ color: 'var(--md-on-surface-variant)' }}>{feature.description}</p>
                 </div>
               )
             })}
@@ -187,52 +170,40 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Welcome Message Section */}
-      <section className="py-20 bg-white">
+      {/* Welcome Message – M3 Card layout */}
+      <section className="py-20" style={{ background: 'var(--md-surface-container-low)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="relative">
-              <div className="bg-gradient-to-br from-teal-100 to-teal-50 rounded-3xl p-8 md:p-12">
-                <div className="bg-white rounded-2xl p-8 card-shadow">
-                  <div className="w-24 h-24 gradient-primary rounded-full mx-auto mb-6 flex items-center justify-center">
-                    <Users className="text-white" size={40} />
+              <div className="rounded-3xl p-8 md:p-12" style={{ background: 'var(--md-surface-container)' }}>
+                <div className="rounded-2xl p-8 m3-card-elevated">
+                  <div
+                    className="w-24 h-24 rounded-full mx-auto mb-6 flex items-center justify-center"
+                    style={{ background: 'var(--md-primary)', color: 'var(--md-on-primary)' }}
+                  >
+                    <Users size={40} />
                   </div>
-                  <h3 className="text-xl font-bold text-center text-gray-900 mb-2">Ust. Muhammad Iqbal, S.Pd</h3>
-                  <p className="text-center text-teal-600 mb-4">Pimpinan Yayasan</p>
-                  <div className="w-16 h-1 bg-amber-400 mx-auto"></div>
+                  <h3 className="text-xl font-medium text-center mb-2" style={{ color: 'var(--md-on-surface)' }}>Ust. Muhammad Iqbal, S.Pd</h3>
+                  <p className="text-center text-sm" style={{ color: 'var(--md-primary)' }}>Pimpinan Yayasan</p>
+                  <div className="w-16 h-1 rounded-full mx-auto mt-4" style={{ background: 'var(--md-tertiary-container)' }}></div>
                 </div>
               </div>
             </div>
             <div>
-              <span className="text-teal-600 font-semibold">Sambutan Pimpinan</span>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-2 mb-4">
+              <span className="text-sm font-medium" style={{ color: 'var(--md-primary)' }}>Sambutan Pimpinan</span>
+              <h2 className="text-3xl md:text-4xl font-bold mt-2 mb-6" style={{ color: 'var(--md-on-surface)' }}>
                 Selamat Datang di Rumah Quran Syababul Khair
               </h2>
-              <div className="section-divider mb-6" style={{margin: '0 0 1.5rem 0'}}></div>
-              <div className="space-y-4 text-gray-600 leading-relaxed">
-                <p>
-                  <em>Assalamu'alaikum Warahmatullahi Wabarakatuh,</em>
-                </p>
-                <p>
-                  Segala puji bagi Allah SWT yang telah memberikan kita kesempatan untuk terus mendekat kepada-Nya
-                  melalui Al-Quran. Shalawat dan salam semoga tercurah kepada Nabi Muhammad SAW.
-                </p>
-                <p>
-                  Rumah Quran Syababul Khair hadir sebagai wadah bagi generasi muda untuk belajar dan mencintai
-                  Al-Quran. Kami percaya bahwa setiap anak memiliki potensi luar biasa untuk menjadi penghafal
-                  dan pengamal Al-Quran.
-                </p>
-                <p>
-                  Mari bergabung bersama kami dalam perjalanan mulia ini. Jadikan Al-Quran sebagai sahabat
-                  terbaik dalam kehidupan.
-                </p>
-                <p className="font-semibold text-teal-700">
-                  <em>Wassalamu'alaikum Warahmatullahi Wabarakatuh.</em>
-                </p>
+              <div className="space-y-4 text-base leading-relaxed" style={{ color: 'var(--md-on-surface-variant)' }}>
+                <p><em>Assalamu'alaikum Warahmatullahi Wabarakatuh,</em></p>
+                <p>Segala puji bagi Allah SWT yang telah memberikan kita kesempatan untuk terus mendekat kepada-Nya melalui Al-Quran. Shalawat dan salam semoga tercurah kepada Nabi Muhammad SAW.</p>
+                <p>Rumah Quran Syababul Khair hadir sebagai wadah bagi generasi muda untuk belajar dan mencintai Al-Quran. Kami percaya bahwa setiap anak memiliki potensi luar biasa untuk menjadi penghafal dan pengamal Al-Quran.</p>
+                <p className="font-medium" style={{ color: 'var(--md-primary)' }}><em>Wassalamu'alaikum Warahmatullahi Wabarakatuh.</em></p>
               </div>
               <Link
                 to="/profil"
-                className="inline-flex items-center gap-2 mt-8 text-teal-600 hover:text-teal-700 font-semibold"
+                className="inline-flex items-center gap-2 mt-8 text-sm font-medium"
+                style={{ color: 'var(--md-primary)' }}
               >
                 Baca Selengkapnya <ArrowRight size={18} />
               </Link>
@@ -241,34 +212,33 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Activities Preview */}
-      <section className="py-20 gradient-hero pattern-islamic">
+      {/* Activities – M3 Tertiary surface */}
+      <section className="py-20 pattern-islamic" style={{ background: 'var(--md-primary)', color: 'var(--md-on-primary)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              Kegiatan Kami
-            </h2>
-            <div className="section-divider mb-6" style={{background: 'linear-gradient(90deg, #fbbf24, #fff, #fbbf24)'}}></div>
-            <p className="text-lg text-teal-100 max-w-2xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Kegiatan Kami</h2>
+            <p className="text-lg max-w-2xl mx-auto opacity-85">
               Berbagai kegiatan untuk menunjang pembelajaran Al-Quran dan pembinaan karakter Islami
             </p>
           </div>
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-6">
             {activities.map((activity, index) => (
               <div
                 key={index}
-                className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 text-white hover:bg-white/20 transition-all"
+                className="rounded-2xl p-8 transition-all duration-300 hover:scale-[1.02]"
+                style={{ background: 'rgba(255,255,255,0.1)', backdropFilter: 'blur(8px)' }}
               >
                 <div className="text-5xl mb-6">{activity.image}</div>
-                <h3 className="text-xl font-semibold mb-3">{activity.title}</h3>
-                <p className="text-teal-100">{activity.description}</p>
+                <h3 className="text-xl font-medium mb-3">{activity.title}</h3>
+                <p className="opacity-85">{activity.description}</p>
               </div>
             ))}
           </div>
           <div className="text-center mt-12">
             <Link
               to="/kegiatan"
-              className="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-600 text-white px-8 py-4 rounded-xl font-semibold transition-all"
+              className="inline-flex items-center gap-2 h-14 px-8 rounded-full font-medium transition-all duration-200"
+              style={{ background: 'var(--md-tertiary-container)', color: 'var(--md-on-tertiary-container)' }}
             >
               Lihat Semua Kegiatan <ArrowRight size={20} />
             </Link>
@@ -276,51 +246,48 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Location Section */}
-      <section className="py-20 bg-white">
+      {/* Location – M3 clean layout */}
+      <section className="py-20" style={{ background: 'var(--md-surface-container-lowest)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <span className="text-teal-600 font-semibold">Lokasi Kami</span>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-2 mb-6">
+              <span className="text-sm font-medium" style={{ color: 'var(--md-primary)' }}>Lokasi Kami</span>
+              <h2 className="text-3xl md:text-4xl font-bold mt-2 mb-6" style={{ color: 'var(--md-on-surface)' }}>
                 Kunjungi Rumah Quran Syababul Khair
               </h2>
-              <p className="text-gray-600 mb-8 leading-relaxed">
-                Kami berlokasi di tempat yang strategis dan mudah dijangkau.
-                Datang dan kunjungi kami untuk melihat langsung kegiatan pembelajaran kami.
+              <p className="mb-8 leading-relaxed" style={{ color: 'var(--md-on-surface-variant)' }}>
+                Kami berlokasi di tempat yang strategis dan mudah dijangkau. Datang dan kunjungi kami untuk melihat langsung kegiatan pembelajaran kami.
               </p>
               <div className="space-y-4">
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-teal-100 rounded-xl flex items-center justify-center flex-shrink-0">
-                    <MapPin className="text-teal-600" size={24} />
+                {[
+                  { icon: MapPin, title: 'Alamat', desc: 'Klik link untuk melihat lokasi di Google Maps' },
+                  { icon: Calendar, title: 'Jam Operasional', desc: 'Senin - Jumat: 16:00 - 18:00', desc2: 'Sabtu - Minggu: 08:00 - 10:00' }
+                ].map((item, i) => (
+                  <div key={i} className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
+                      style={{ background: 'var(--md-secondary-container)', color: 'var(--md-on-secondary-container)' }}>
+                      <item.icon size={24} />
+                    </div>
+                    <div>
+                      <h4 className="font-medium" style={{ color: 'var(--md-on-surface)' }}>{item.title}</h4>
+                      <p className="text-sm" style={{ color: 'var(--md-on-surface-variant)' }}>{item.desc}</p>
+                      {item.desc2 && <p className="text-sm" style={{ color: 'var(--md-on-surface-variant)' }}>{item.desc2}</p>}
+                    </div>
                   </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-900">Alamat</h4>
-                    <p className="text-gray-600">Klik link untuk melihat lokasi di Google Maps</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-teal-100 rounded-xl flex items-center justify-center flex-shrink-0">
-                    <Calendar className="text-teal-600" size={24} />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-900">Jam Operasional</h4>
-                    <p className="text-gray-600">Senin - Jumat: 16:00 - 18:00</p>
-                    <p className="text-gray-600">Sabtu - Minggu: 08:00 - 10:00</p>
-                  </div>
-                </div>
+                ))}
               </div>
               <a
                 href="https://maps.app.goo.gl/Nup11EjQLmr9x5uh7"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 mt-8 bg-teal-600 hover:bg-teal-700 text-white px-8 py-4 rounded-xl font-semibold transition-all"
+                className="inline-flex items-center gap-2 h-12 px-6 mt-8 rounded-full font-medium transition-all duration-200"
+                style={{ background: 'var(--md-primary)', color: 'var(--md-on-primary)' }}
               >
                 <MapPin size={20} />
                 Lihat di Google Maps
               </a>
             </div>
-            <div className="bg-gray-100 rounded-3xl overflow-hidden card-shadow h-96">
+            <div className="rounded-3xl overflow-hidden h-96" style={{ background: 'var(--md-surface-container)' }}>
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3982.5!2d104.8250119!3d-3.0559892!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e3b9dc9729d1b81%3A0x482ca8c781d80889!2sRumah%20Qur'an%20Syababul%20Khair!5e0!3m2!1sid!2sid!4v1"
                 width="100%"
@@ -336,18 +303,19 @@ const Home = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-br from-amber-400 to-amber-500">
+      {/* CTA – M3 Tertiary container */}
+      <section className="py-20" style={{ background: 'var(--md-tertiary-container)' }}>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6" style={{ color: 'var(--md-on-tertiary-container)' }}>
             Siap Bergabung Bersama Kami?
           </h2>
-          <p className="text-xl text-amber-50 mb-8">
+          <p className="text-xl mb-8 opacity-80" style={{ color: 'var(--md-on-tertiary-container)' }}>
             Daftarkan putra-putri Anda sekarang dan mulai perjalanan mulia bersama Al-Quran
           </p>
           <Link
             to="/pendaftaran"
-            className="inline-flex items-center gap-2 bg-teal-600 hover:bg-teal-700 text-white px-10 py-5 rounded-xl font-semibold text-lg transition-all hover:scale-105"
+            className="inline-flex items-center gap-2 h-14 px-10 rounded-full font-medium text-lg transition-all duration-200 hover:shadow-lg"
+            style={{ background: 'var(--md-primary)', color: 'var(--md-on-primary)' }}
           >
             Daftar Sekarang <ArrowRight size={24} />
           </Link>

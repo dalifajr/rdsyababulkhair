@@ -1,11 +1,18 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { Menu, X, BookOpen, Home, Users, Target, Calendar, Image, Info, FileText, Phone, UserCircle } from 'lucide-react'
 import Logo from './Logo'
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
   const location = useLocation()
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8)
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   const navItems = [
     { name: 'Beranda', path: '/', icon: Home },
@@ -22,98 +29,121 @@ const Navbar = () => {
   const isActive = (path) => location.pathname === path
 
   return (
-    <nav className="bg-white/95 backdrop-blur-md shadow-md sticky top-0 z-50 border-b border-gray-100">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-20">
-          {/* Logo */}
-          <div className="flex items-center">
+    <>
+      {/* M3 Top App Bar */}
+      <nav
+        className={`sticky top-0 z-50 transition-all duration-300 ${
+          scrolled
+            ? 'bg-[var(--md-surface-container)] shadow-[var(--md-elevation-2)]'
+            : 'bg-[var(--md-surface)]'
+        }`}
+        style={{ transitionTimingFunction: 'var(--md-motion-standard)' }}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            {/* Leading: Logo */}
             <Link to="/" className="flex items-center gap-3">
-              <Logo size={50} />
+              <Logo size={40} />
               <div className="hidden sm:block">
-                <h1 className="text-lg font-bold text-teal-700">Rumah Quran</h1>
-                <p className="text-sm text-teal-600">Syababul Khair</p>
+                <h1 className="text-base font-medium" style={{ color: 'var(--md-on-surface)' }}>Rumah Quran</h1>
+                <p className="text-xs" style={{ color: 'var(--md-on-surface-variant)' }}>Syababul Khair</p>
               </div>
             </Link>
-          </div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-1">
-            {navItems.map((item) => {
-              const Icon = item.icon
-              return (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  className={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center gap-1.5 ${
-                    isActive(item.path)
-                      ? 'bg-teal-600 text-white shadow-sm'
-                      : 'text-gray-600 hover:bg-teal-50 hover:text-teal-700'
-                  }`}
-                >
-                  <Icon size={16} />
-                  {item.name}
-                </Link>
-              )
-            })}
-          </div>
+            {/* Center: Desktop Navigation */}
+            <div className="hidden lg:flex items-center gap-1">
+              {navItems.map((item) => {
+                const Icon = item.icon
+                const active = isActive(item.path)
+                return (
+                  <Link
+                    key={item.path}
+                    to={item.path}
+                    className="relative flex flex-col items-center px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200"
+                    style={{
+                      color: active ? 'var(--md-on-secondary-container)' : 'var(--md-on-surface-variant)',
+                      background: active ? 'var(--md-secondary-container)' : 'transparent',
+                    }}
+                    onMouseEnter={(e) => {
+                      if (!active) e.currentTarget.style.background = 'color-mix(in srgb, var(--md-on-surface) 8%, transparent)'
+                    }}
+                    onMouseLeave={(e) => {
+                      if (!active) e.currentTarget.style.background = 'transparent'
+                    }}
+                  >
+                    <Icon size={16} />
+                    <span className="mt-0.5">{item.name}</span>
+                  </Link>
+                )
+              })}
+            </div>
 
-          {/* Admin Login Link */}
-          <div className="hidden lg:flex items-center">
-            <Link
-              to="/admin/login"
-              className="ml-4 px-4 py-2 rounded-lg bg-amber-500 text-white font-medium hover:bg-amber-600 transition-colors flex items-center gap-2"
-            >
-              <UserCircle size={18} />
-              Admin
-            </Link>
-          </div>
+            {/* Trailing: Admin + Mobile Toggle */}
+            <div className="flex items-center gap-2">
+              <Link
+                to="/admin/login"
+                className="hidden lg:inline-flex items-center gap-2 h-10 px-6 text-sm font-medium rounded-full transition-all duration-200"
+                style={{
+                  background: 'var(--md-tertiary-container)',
+                  color: 'var(--md-on-tertiary-container)',
+                }}
+              >
+                <UserCircle size={18} />
+                Admin
+              </Link>
 
-          {/* Mobile menu button */}
-          <div className="lg:hidden flex items-center">
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-700 hover:text-teal-600 p-2"
-            >
-              {isOpen ? <X size={28} /> : <Menu size={28} />}
-            </button>
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                className="lg:hidden flex items-center justify-center w-12 h-12 rounded-full transition-colors"
+                style={{ color: 'var(--md-on-surface-variant)' }}
+              >
+                {isOpen ? <X size={24} /> : <Menu size={24} />}
+              </button>
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Mobile Navigation */}
-      {isOpen && (
-        <div className="lg:hidden bg-white/95 backdrop-blur-md border-t border-gray-100 animate-slideDown">
-          <div className="px-4 py-3 space-y-1">
-            {navItems.map((item) => {
-              const Icon = item.icon
-              return (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  onClick={() => setIsOpen(false)}
-                  className={`block px-4 py-3 rounded-lg text-base font-medium transition-colors flex items-center gap-3 ${
-                    isActive(item.path)
-                      ? 'bg-teal-600 text-white'
-                      : 'text-gray-700 hover:bg-teal-50'
-                  }`}
-                >
-                  <Icon size={20} />
-                  {item.name}
-                </Link>
-              )
-            })}
-            <Link
-              to="/admin/login"
-              onClick={() => setIsOpen(false)}
-              className="block px-4 py-3 rounded-lg text-base font-medium bg-amber-500 text-white hover:bg-amber-600 flex items-center gap-3"
-            >
-              <UserCircle size={20} />
-              Admin Login
-            </Link>
+        {/* Mobile: M3 Navigation Drawer style */}
+        {isOpen && (
+          <div className="lg:hidden animate-slideDown" style={{ background: 'var(--md-surface-container-low)' }}>
+            <div className="px-3 py-2 space-y-0.5">
+              {navItems.map((item) => {
+                const Icon = item.icon
+                const active = isActive(item.path)
+                return (
+                  <Link
+                    key={item.path}
+                    to={item.path}
+                    onClick={() => setIsOpen(false)}
+                    className="flex items-center gap-3 h-14 px-4 rounded-full text-sm font-medium transition-all duration-200"
+                    style={{
+                      color: active ? 'var(--md-on-secondary-container)' : 'var(--md-on-surface-variant)',
+                      background: active ? 'var(--md-secondary-container)' : 'transparent',
+                    }}
+                  >
+                    <Icon size={20} />
+                    {item.name}
+                  </Link>
+                )
+              })}
+              <div className="mx-4 my-2" style={{ height: 1, background: 'var(--md-outline-variant)' }} />
+              <Link
+                to="/admin/login"
+                onClick={() => setIsOpen(false)}
+                className="flex items-center gap-3 h-14 px-4 rounded-full text-sm font-medium transition-all duration-200"
+                style={{
+                  background: 'var(--md-tertiary-container)',
+                  color: 'var(--md-on-tertiary-container)',
+                }}
+              >
+                <UserCircle size={20} />
+                Admin Login
+              </Link>
+            </div>
           </div>
-        </div>
-      )}
-    </nav>
+        )}
+      </nav>
+    </>
   )
 }
 

@@ -1,240 +1,142 @@
-import { History, Award, Heart, Users, Target, MapPin, BookOpen, Star } from 'lucide-react'
-import Logo from '../components/Logo'
+import { BookOpen, Users, Award, Heart, MapPin, Calendar, ChevronRight, Target } from 'lucide-react'
 
 const Tentang = () => {
   const milestones = [
-    {
-      year: '2019',
-      title: 'Pendirian',
-      description: 'Rumah Quran Syababul Khair resmi berdiri dengan 15 santri pertama'
-    },
-    {
-      year: '2020',
-      title: 'Pengembangan Program',
-      description: 'Menambahkan program Tahfidz dan Kajian Keislaman'
-    },
-    {
-      year: '2021',
-      title: 'Pertumbuhan',
-      description: 'Jumlah santri mencapai 50 orang dengan 5 pengajar'
-    },
-    {
-      year: '2022',
-      title: 'Wisuda Perdana',
-      description: 'Mengadakan wisuda perdana untuk 20 santri yang hafal Juz 30'
-    },
-    {
-      year: '2023',
-      title: 'Ekspansi',
-      description: 'Membuka kelas tambahan untuk usia dewasa'
-    },
-    {
-      year: '2024',
-      title: 'Digitalisasi',
-      description: 'Meluncurkan website dan sistem pendaftaran online'
-    }
+    { year: '2018', title: 'Pendirian', description: 'RQ Syababul Khair resmi didirikan dengan 15 santri pertama.' },
+    { year: '2019', title: 'Pengembangan Kurikulum', description: 'Kurikulum tahsin dan tahfidz mulai disusun secara terstruktur.' },
+    { year: '2020', title: 'Pertumbuhan', description: 'Jumlah santri mencapai 50 orang dengan 5 pengajar.' },
+    { year: '2021', title: 'Program Tahfidz', description: 'Meluncurkan program tahfidz intensif dengan target hafalan.' },
+    { year: '2022', title: 'Fasilitas Baru', description: 'Pembangunan gedung baru dengan fasilitas belajar yang lebih baik.' },
+    { year: '2023', title: 'Prestasi', description: 'Santri berhasil meraih juara di berbagai lomba tahfidz tingkat kota.' },
+    { year: '2024', title: 'Ekspansi', description: 'Membuka kelas baru dan memperluas jangkauan dakwah.' }
   ]
 
   const achievements = [
-    'Meluluskan 100+ santri yang hafal Juz 30',
-    'Juara 1 Lomba Tahfidz tingkat Kecamatan',
-    'Mendapat apresiasi dari Dinas Pendidikan',
-    'Menjadi percontohan TPA di wilayah sekitar',
-    'Bekerjasama dengan 5 masjid mitra'
+    { number: '200+', label: 'Santri Aktif', icon: Users },
+    { number: '50+', label: 'Alumni', icon: Award },
+    { number: '15+', label: 'Pengajar', icon: BookOpen },
+    { number: '6+', label: 'Tahun Berdiri', icon: Calendar }
+  ]
+
+  const whyChooseUs = [
+    { title: 'Kurikulum Terstruktur', description: 'Program belajar disusun secara sistematis sesuai tingkatan kemampuan santri.', icon: BookOpen },
+    { title: 'Pengajar Berkualitas', description: 'Ustadz dan ustadzah berpengalaman dengan sanad keilmuan yang jelas.', icon: Users },
+    { title: 'Lingkungan Islami', description: 'Suasana belajar yang kondusif dan penuh nilai-nilai keislaman.', icon: Heart },
+    { title: 'Prestasi Gemilang', description: 'Santri berprestasi di berbagai kompetisi tahfidz dan keislaman.', icon: Award }
   ]
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="gradient-hero py-20 pattern-islamic page-hero">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center text-white">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Tentang Kami</h1>
-            <p className="text-xl text-teal-100 max-w-2xl mx-auto">
-              Mengenal lebih dekat sejarah, perjalanan, dan pencapaian Rumah Quran Syababul Khair
-            </p>
-          </div>
+      {/* M3 Hero */}
+      <section className="py-20 pattern-islamic" style={{ background: 'var(--md-primary)', color: 'var(--md-on-primary)' }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">Tentang Kami</h1>
+          <p className="text-xl max-w-2xl mx-auto opacity-85">Mengenal lebih dekat Rumah Quran Syababul Khair</p>
         </div>
       </section>
 
       {/* Introduction */}
-      <section className="py-20 bg-white">
+      <section className="py-20" style={{ background: 'var(--md-surface-container-lowest)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <div className="flex justify-center">
-                <Logo size={250} />
+              <div className="inline-block px-4 py-1.5 rounded-full text-sm font-medium mb-6" style={{ background: 'var(--md-primary-container)', color: 'var(--md-on-primary-container)' }}>
+                Tentang RQ Syababul Khair
               </div>
+              <h2 className="text-3xl md:text-4xl font-bold mb-6" style={{ color: 'var(--md-on-surface)' }}>Membentuk Generasi Qurani Berakhlak Mulia</h2>
+              <p className="text-lg mb-4" style={{ color: 'var(--md-on-surface-variant)' }}>
+                Rumah Quran Syababul Khair adalah lembaga pendidikan Al-Quran yang berdedikasi untuk membina 
+                generasi muda dalam mempelajari, memahami, dan mengamalkan Al-Quran.
+              </p>
+              <p className="text-lg" style={{ color: 'var(--md-on-surface-variant)' }}>
+                Didirikan pada tahun 2018, kami terus berkomitmen untuk memberikan pendidikan Al-Quran 
+                yang berkualitas dengan metode pembelajaran modern dan berlandaskan nilai-nilai salafus shalih.
+              </p>
             </div>
-            <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-                Rumah Quran <span className="text-gradient">Syababul Khair</span>
-              </h2>
-              <div className="space-y-4 text-gray-600 leading-relaxed">
-                <p>
-                  <strong className="text-gray-900">Rumah Quran Syababul Khair</strong> adalah lembaga pendidikan
-                  non-formal yang fokus pada pengajaran Al-Quran dan pembinaan karakter Islami. Didirikan pada tahun 2019
-                  oleh Ust. Muhammad Iqbal, S.Pd, lembaga ini lahir dari keprihatinan akan minimnya wadah pendidikan
-                  Al-Quran yang berkualitas di lingkungan sekitar.
-                </p>
-                <p>
-                  Nama "Syababul Khair" diambil dari bahasa Arab yang berarti "Pemuda yang Baik". Nama ini
-                  mencerminkan visi kami untuk mencetak generasi muda yang tidak hanya mahir membaca Al-Quran
-                  tetapi juga berakhlak mulia sesuai tuntunan Rasulullah SAW.
-                </p>
-                <p>
-                  Dengan dukungan tenaga pengajar yang kompeten dan kurikulum yang terstruktur, kami berkomitmen
-                  untuk memberikan pendidikan Al-Quran terbaik bagi seluruh santri dari berbagai usia.
-                </p>
-              </div>
+            <div className="m3-card-elevated p-2 overflow-hidden">
+              <img src="/images/galeri/kegiatan-1.svg" alt="RQ Syababul Khair" className="w-full h-80 object-cover rounded-xl" onError={e => { e.target.style.display = 'none' }} />
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Achievement Stats */}
+      <section className="py-16" style={{ background: 'var(--md-primary-container)' }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {achievements.map((item, index) => {
+              const Icon = item.icon
+              return (
+                <div key={index} className="text-center">
+                  <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-3" style={{ background: 'var(--md-primary)', color: 'var(--md-on-primary)' }}>
+                    <Icon size={28} />
+                  </div>
+                  <div className="text-3xl font-bold mb-1" style={{ color: 'var(--md-on-primary-container)' }}>{item.number}</div>
+                  <div className="text-sm font-medium" style={{ color: 'var(--md-on-primary-container)', opacity: 0.8 }}>{item.label}</div>
+                </div>
+              )
+            })}
           </div>
         </div>
       </section>
 
       {/* Timeline */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20" style={{ background: 'var(--md-surface)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <div className="inline-flex items-center justify-center w-16 h-16 gradient-primary rounded-full mb-4">
-              <History className="text-white" size={32} />
-            </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Perjalanan Kami</h2>
-            <div className="section-divider mb-6"></div>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Milestone penting dalam sejarah Rumah Quran Syababul Khair
-            </p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ color: 'var(--md-on-surface)' }}>Perjalanan Kami</h2>
+            <p className="text-lg max-w-2xl mx-auto" style={{ color: 'var(--md-on-surface-variant)' }}>Tonggak penting dalam sejarah RQ Syababul Khair</p>
           </div>
-
-          <div className="max-w-4xl mx-auto">
-            <div className="relative">
-              {/* Timeline line */}
-              <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-teal-200 hidden md:block"></div>
-
-              <div className="space-y-8">
-                {milestones.map((milestone, index) => (
-                  <div
-                    key={index}
-                    className={`flex flex-col md:flex-row gap-8 items-center ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
-                      }`}
-                  >
-                    <div className={`flex-1 ${index % 2 === 0 ? 'md:text-right' : 'md:text-left'}`}>
-                      <div className="bg-white p-6 rounded-2xl card-shadow">
-                        <span className="text-teal-600 font-bold text-lg">{milestone.year}</span>
-                        <h3 className="text-xl font-bold text-gray-900 mt-1">{milestone.title}</h3>
-                        <p className="text-gray-600 mt-2">{milestone.description}</p>
+          <div className="max-w-3xl mx-auto relative">
+            <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 -translate-x-1/2" style={{ background: 'var(--md-outline-variant)' }}></div>
+            <div className="space-y-10">
+              {milestones.map((item, index) => (
+                <div key={index} className={`relative flex items-start gap-6 ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
+                  <div className="hidden md:block w-[calc(50%-2rem)] text-right">
+                    {index % 2 === 0 && (
+                      <div className="m3-card-elevated p-5 inline-block text-left">
+                        <h3 className="font-bold text-lg mb-1" style={{ color: 'var(--md-on-surface)' }}>{item.title}</h3>
+                        <p className="text-sm" style={{ color: 'var(--md-on-surface-variant)' }}>{item.description}</p>
                       </div>
-                    </div>
-                    <div className="w-4 h-4 bg-teal-600 rounded-full flex-shrink-0 z-10 hidden md:block"></div>
-                    <div className="flex-1 hidden md:block"></div>
+                    )}
+                    {index % 2 !== 0 && (
+                      <div className="m3-card-elevated p-5 inline-block text-left">
+                        <h3 className="font-bold text-lg mb-1" style={{ color: 'var(--md-on-surface)' }}>{item.title}</h3>
+                        <p className="text-sm" style={{ color: 'var(--md-on-surface-variant)' }}>{item.description}</p>
+                      </div>
+                    )}
                   </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Achievements */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <div className="inline-flex items-center justify-center w-16 h-16 gradient-gold rounded-full mb-6">
-                <Award className="text-white" size={32} />
-              </div>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Pencapaian Kami</h2>
-              <div className="section-divider mb-6" style={{margin: '0 0 1.5rem 0'}}></div>
-              <p className="text-gray-600 mb-8 leading-relaxed">
-                Alhamdulillah, dengan izin Allah SWT dan dukungan dari berbagai pihak,
-                Rumah Quran Syababul Khair telah mencapai berbagai pencapaian yang membanggakan.
-              </p>
-              <div className="space-y-4">
-                {achievements.map((achievement, index) => (
-                  <div key={index} className="flex items-center gap-4">
-                    <div className="w-8 h-8 bg-amber-100 rounded-full flex items-center justify-center flex-shrink-0">
-                      <Star className="text-amber-600" size={16} />
-                    </div>
-                    <p className="text-gray-700">{achievement}</p>
+                  <div className="w-16 h-16 rounded-full flex items-center justify-center flex-shrink-0 z-10 text-sm font-bold" style={{ background: 'var(--md-primary)', color: 'var(--md-on-primary)' }}>{item.year}</div>
+                  <div className="md:hidden flex-1 m3-card-elevated p-5">
+                    <h3 className="font-bold text-lg mb-1" style={{ color: 'var(--md-on-surface)' }}>{item.title}</h3>
+                    <p className="text-sm" style={{ color: 'var(--md-on-surface-variant)' }}>{item.description}</p>
                   </div>
-                ))}
-              </div>
-            </div>
-            <div className="grid grid-cols-2 gap-6">
-              {[
-                { number: '150+', label: 'Santri Aktif', icon: Users },
-                { number: '100+', label: 'Alumni Hafidz', icon: BookOpen },
-                { number: '10+', label: 'Pengajar', icon: Heart },
-                { number: '5+', label: 'Tahun Berdiri', icon: History }
-              ].map((stat, index) => {
-                const Icon = stat.icon
-                return (
-                  <div key={index} className="bg-gradient-to-br from-teal-50 to-white p-6 rounded-2xl text-center card-shadow">
-                    <Icon className="text-teal-600 mx-auto mb-4" size={32} />
-                    <div className="text-3xl font-bold text-teal-600">{stat.number}</div>
-                    <div className="text-gray-600 text-sm mt-1">{stat.label}</div>
-                  </div>
-                )
-              })}
+                  <div className="hidden md:block w-[calc(50%-2rem)]"></div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
       {/* Why Choose Us */}
-      <section className="py-20 gradient-hero pattern-islamic">
+      <section className="py-20" style={{ background: 'var(--md-surface-container-low)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              Mengapa Memilih Kami?
-            </h2>
-            <p className="text-lg text-teal-100 max-w-2xl mx-auto">
-              Keunggulan yang membuat Rumah Quran Syababul Khair menjadi pilihan terbaik
-            </p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ color: 'var(--md-on-surface)' }}>Mengapa Memilih Kami?</h2>
           </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                icon: BookOpen,
-                title: 'Kurikulum Terstruktur',
-                description: 'Program pembelajaran yang sistematis dan teruji dengan target yang jelas'
-              },
-              {
-                icon: Users,
-                title: 'Pengajar Kompeten',
-                description: 'Dibimbing oleh ustadz/ustadzah yang berpengalaman dan bersertifikat'
-              },
-              {
-                icon: Heart,
-                title: 'Lingkungan Kondusif',
-                description: 'Suasana belajar yang Islami, nyaman, dan mendukung konsentrasi'
-              },
-              {
-                icon: Target,
-                title: 'Metode Efektif',
-                description: 'Menggunakan metode pembelajaran yang telah terbukti efektif'
-              },
-              {
-                icon: Award,
-                title: 'Pembinaan Karakter',
-                description: 'Tidak hanya mengaji, tapi juga membentuk akhlak yang mulia'
-              },
-              {
-                icon: MapPin,
-                title: 'Lokasi Strategis',
-                description: 'Mudah dijangkau dengan tempat parkir yang memadai'
-              }
-            ].map((item, index) => {
+          <div className="grid md:grid-cols-2 gap-6">
+            {whyChooseUs.map((item, index) => {
               const Icon = item.icon
               return (
-                <div
-                  key={index}
-                  className="bg-white/10 backdrop-blur-sm p-8 rounded-2xl text-white hover:bg-white/20 transition-all"
-                >
-                  <Icon className="text-amber-400 mb-4" size={40} />
-                  <h3 className="text-xl font-bold mb-3">{item.title}</h3>
-                  <p className="text-teal-100">{item.description}</p>
+                <div key={index} className="m3-card-elevated p-6 flex items-start gap-5">
+                  <div className="w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: 'var(--md-primary-container)', color: 'var(--md-on-primary-container)' }}>
+                    <Icon size={24} />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold mb-2" style={{ color: 'var(--md-on-surface)' }}>{item.title}</h3>
+                    <p className="text-sm" style={{ color: 'var(--md-on-surface-variant)' }}>{item.description}</p>
+                  </div>
                 </div>
               )
             })}
@@ -243,39 +145,26 @@ const Tentang = () => {
       </section>
 
       {/* Location */}
-      <section className="py-20 bg-white">
+      <section className="py-20" style={{ background: 'var(--md-surface-container-lowest)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Kunjungi Kami</h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Datang dan lihat langsung suasana pembelajaran di Rumah Quran Syababul Khair
-            </p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ color: 'var(--md-on-surface)' }}>Lokasi Kami</h2>
           </div>
-
-          <div className="max-w-4xl mx-auto">
-            <div className="bg-gray-100 rounded-3xl overflow-hidden card-shadow h-96">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3982.5!2d104.8250119!3d-3.0559892!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e3b9dc9729d1b81%3A0x482ca8c781d80889!2sRumah%20Qur'an%20Syababul%20Khair!5e0!3m2!1sid!2sid!4v1"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen=""
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="Lokasi Rumah Quran Syababul Khair"
-              ></iframe>
-            </div>
-            <div className="text-center mt-8">
-              <a
-                href="https://maps.app.goo.gl/Nup11EjQLmr9x5uh7"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-teal-600 hover:bg-teal-700 text-white px-8 py-4 rounded-xl font-semibold transition-all"
-              >
+          <div className="m3-card-elevated overflow-hidden">
+            <div className="p-6 flex items-center gap-3" style={{ borderBottom: '1px solid var(--md-outline-variant)' }}>
+              <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ background: 'var(--md-secondary-container)', color: 'var(--md-on-secondary-container)' }}>
                 <MapPin size={20} />
-                Buka di Google Maps
-              </a>
+              </div>
+              <div>
+                <p className="font-medium" style={{ color: 'var(--md-on-surface)' }}>Jl. Pendidikan No. 123</p>
+                <p className="text-sm" style={{ color: 'var(--md-on-surface-variant)' }}>Kota, Provinsi</p>
+              </div>
             </div>
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.0!2d106.8!3d-6.2!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1"
+              width="100%" height="400" style={{ border: 0 }} allowFullScreen="" loading="lazy"
+              title="Lokasi RQ Syababul Khair" className="w-full"
+            />
           </div>
         </div>
       </section>
