@@ -21,7 +21,7 @@ const Profile = () => {
   return (
     <div className="min-h-screen">
       <section
-        className="relative py-24 bg-cover bg-center"
+        className="relative py-24 bg-cover bg-center page-hero"
         style={{ backgroundImage: "url('/images/bg/rq-syababul-khair-hero.jpg')" }}
       >
         <div className="absolute inset-0 bg-teal-950/75"></div>
@@ -84,7 +84,7 @@ const Profile = () => {
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
               Sambutan Pimpinan Yayasan
             </h2>
-            <div className="w-24 h-1 bg-amber-400 mx-auto"></div>
+            <div className="section-divider"></div>
           </div>
           
           <div className="max-w-4xl mx-auto">
@@ -117,6 +117,7 @@ const Profile = () => {
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
               Tim Pengajar Kami
             </h2>
+            <div className="section-divider mb-6"></div>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               Para ustadz dan ustadzah yang kompeten dan berdedikasi tinggi dalam mengajarkan Al-Quran
             </p>
@@ -136,7 +137,7 @@ const Profile = () => {
         </div>
       </section>
 
-      <section className="py-20 gradient-primary pattern-islamic">
+      <section className="py-20 gradient-hero pattern-islamic">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center text-white">
             <h2 className="text-3xl md:text-4xl font-bold mb-6">Sejarah Singkat</h2>

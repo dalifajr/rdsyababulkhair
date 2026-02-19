@@ -1,4 +1,5 @@
 import { Calendar, Clock, Users, BookOpen, Star, Award } from 'lucide-react'
+import { defaultGalleryImages } from '../data/siteContent'
 
 const Kegiatan = () => {
   const dailyActivities = [
@@ -90,7 +91,7 @@ const Kegiatan = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="gradient-primary py-20 pattern-islamic">
+      <section className="gradient-hero py-20 pattern-islamic page-hero">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center text-white">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Kegiatan Kami</h1>
@@ -106,6 +107,7 @@ const Kegiatan = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Program Pembelajaran</h2>
+            <div className="section-divider mb-6"></div>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               Program-program unggulan yang dirancang untuk memenuhi kebutuhan belajar Al-Quran
             </p>
@@ -211,7 +213,7 @@ const Kegiatan = () => {
       </section>
 
       {/* Special Events */}
-      <section className="py-20 gradient-primary pattern-islamic">
+      <section className="py-20 gradient-hero pattern-islamic">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Kegiatan Tahunan</h2>
@@ -243,18 +245,29 @@ const Kegiatan = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Dokumentasi Kegiatan</h2>
+            <div className="section-divider mb-6"></div>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               Momen-momen berharga dari berbagai kegiatan kami
             </p>
           </div>
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {[1, 2, 3, 4].map((index) => (
+            {defaultGalleryImages.slice(0, 4).map((image) => (
               <div 
-                key={index} 
-                className="aspect-square bg-gradient-to-br from-teal-100 to-teal-200 rounded-2xl flex items-center justify-center"
+                key={image.id} 
+                className="aspect-square rounded-2xl overflow-hidden card-shadow card-shadow-hover"
               >
-                <BookOpen className="text-teal-400" size={48} />
+                <img 
+                  src={image.src} 
+                  alt={image.title} 
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                  onError={(e) => {
+                    e.target.style.display = 'none'
+                    e.target.parentElement.classList.add('img-fallback')
+                    e.target.parentElement.innerHTML = '<div class="flex items-center justify-center w-full h-full"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-teal-400"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg></div>'
+                  }}
+                />
               </div>
             ))}
           </div>

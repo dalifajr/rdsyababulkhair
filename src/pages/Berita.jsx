@@ -45,7 +45,7 @@ const Berita = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="gradient-primary py-20 pattern-islamic">
+      <section className="gradient-hero py-20 pattern-islamic page-hero">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center text-white">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Berita & Informasi</h1>
@@ -57,16 +57,16 @@ const Berita = () => {
       </section>
 
       {/* Filter Section */}
-      <section className="py-8 bg-white sticky top-20 z-40 shadow-sm">
+      <section className="py-6 filter-bar sticky top-20 z-40 shadow-sm border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap gap-3 justify-center">
             {categories.map((category) => (
               <button
                 key={category}
                 onClick={() => setSelectedCategory(category)}
-                className={`px-6 py-2 rounded-full font-medium transition-all ${selectedCategory === category
-                    ? 'bg-teal-600 text-white'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                className={`px-5 py-2 rounded-full text-sm font-medium transition-all ${selectedCategory === category
+                    ? 'bg-teal-600 text-white shadow-md shadow-teal-200'
+                    : 'bg-white text-gray-600 hover:bg-teal-50 hover:text-teal-700 border border-gray-200'
                   }`}
               >
                 {category}

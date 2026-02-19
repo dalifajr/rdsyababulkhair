@@ -54,7 +54,7 @@ const VisiMisi = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="gradient-primary py-20 pattern-islamic">
+      <section className="gradient-hero py-20 pattern-islamic page-hero">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center text-white">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Visi & Misi</h1>
@@ -73,7 +73,7 @@ const VisiMisi = () => {
               <Eye className="text-white" size={40} />
             </div>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Visi Kami</h2>
-            <div className="w-24 h-1 bg-amber-400 mx-auto mb-8"></div>
+            <div className="section-divider mb-8"></div>
             <div className="bg-gradient-to-br from-teal-50 to-white p-8 md:p-12 rounded-3xl card-shadow">
               <p className="text-2xl md:text-3xl text-teal-700 font-semibold leading-relaxed">
                 "Menjadi lembaga pendidikan Al-Quran terdepan yang melahirkan generasi Qurani,
@@ -92,7 +92,7 @@ const VisiMisi = () => {
               <Target className="text-white" size={40} />
             </div>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Misi Kami</h2>
-            <div className="w-24 h-1 bg-teal-500 mx-auto"></div>
+            <div className="section-divider"></div>
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -144,7 +144,7 @@ const VisiMisi = () => {
       </section>
 
       {/* Quote Section */}
-      <section className="py-20 gradient-primary pattern-islamic">
+      <section className="py-20 gradient-hero pattern-islamic">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="text-6xl text-amber-400 mb-6">"</div>
           <p className="text-2xl md:text-3xl text-white leading-relaxed mb-6 font-arabic">

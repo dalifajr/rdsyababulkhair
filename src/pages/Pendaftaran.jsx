@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { CheckCircle, AlertCircle, FileText, Send, User, MapPin } from 'lucide-react'
+import { CheckCircle, AlertCircle, FileText, Send, User, MapPin, ArrowRight } from 'lucide-react'
 import { getRegistrations, saveRegistrations } from '../data/siteContent'
 
 const Pendaftaran = () => {
@@ -112,9 +112,15 @@ const Pendaftaran = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="bg-teal-800 py-16 text-white text-center">
-        <h1 className="text-4xl font-bold mb-4">Pendaftaran Santri Baru</h1>
-        <p className="text-teal-100">Mari bergabung menjadi bagian dari keluarga besar Rumah Quran Syababul Khair</p>
+      <section className="gradient-hero py-20 pattern-islamic page-hero">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center text-white">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">Pendaftaran Santri Baru</h1>
+            <p className="text-xl text-teal-100 max-w-2xl mx-auto">
+              Mari bergabung menjadi bagian dari keluarga besar Rumah Quran Syababul Khair
+            </p>
+          </div>
+        </div>
       </section>
 
       <section className="py-12 bg-gray-50">

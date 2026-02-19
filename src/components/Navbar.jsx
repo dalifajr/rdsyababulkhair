@@ -22,7 +22,7 @@ const Navbar = () => {
   const isActive = (path) => location.pathname === path
 
   return (
-    <nav className="bg-white shadow-lg sticky top-0 z-50">
+    <nav className="bg-white/95 backdrop-blur-md shadow-md sticky top-0 z-50 border-b border-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-20">
           {/* Logo */}
@@ -44,10 +44,10 @@ const Navbar = () => {
                 <Link
                   key={item.path}
                   to={item.path}
-                  className={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center gap-1 ${
+                  className={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center gap-1.5 ${
                     isActive(item.path)
-                      ? 'bg-teal-600 text-white'
-                      : 'text-gray-700 hover:bg-teal-50 hover:text-teal-700'
+                      ? 'bg-teal-600 text-white shadow-sm'
+                      : 'text-gray-600 hover:bg-teal-50 hover:text-teal-700'
                   }`}
                 >
                   <Icon size={16} />
@@ -82,7 +82,7 @@ const Navbar = () => {
 
       {/* Mobile Navigation */}
       {isOpen && (
-        <div className="lg:hidden bg-white border-t">
+        <div className="lg:hidden bg-white/95 backdrop-blur-md border-t border-gray-100 animate-slideDown">
           <div className="px-4 py-3 space-y-1">
             {navItems.map((item) => {
               const Icon = item.icon

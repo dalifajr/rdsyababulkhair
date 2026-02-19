@@ -1,7 +1,29 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { BookOpen, Users, Award, Heart, ArrowRight, MapPin, Calendar, Star } from 'lucide-react'
+import { BookOpen, Users, Award, Heart, ArrowRight, MapPin, Calendar, Star, Image as ImageIcon } from 'lucide-react'
 import Logo from '../components/Logo'
 import { defaultGalleryImages } from '../data/siteContent'
+
+const GalleryPreviewCard = ({ image }) => {
+  const [failed, setFailed] = useState(false)
+  return (
+    <div className="rounded-2xl overflow-hidden card-shadow card-shadow-hover bg-white">
+      {!failed ? (
+        <img
+          src={image.src}
+          alt={image.title}
+          className="w-full h-40 md:h-48 object-cover"
+          loading="lazy"
+          onError={() => setFailed(true)}
+        />
+      ) : (
+        <div className="w-full h-40 md:h-48 img-fallback">
+          <ImageIcon className="text-teal-400" size={40} />
+        </div>
+      )}
+    </div>
+  )
+}
 
 const Home = () => {
   const features = [
@@ -103,36 +125,30 @@ const Home = () => {
         {/* Decorative Wave */}
         <div className="absolute bottom-0 left-0 right-0">
           <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="white" />
+            <path d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="#f9fafb" />
           </svg>
         </div>
       </section>
 
-      <section className="py-10 bg-gray-50">
+      {/* Gallery Preview Strip */}
+      <section className="py-12 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
             {defaultGalleryImages.slice(0, 4).map((image) => (
-              <div key={image.id} className="rounded-2xl overflow-hidden card-shadow bg-white">
-                <img
-                  src={image.src}
-                  alt={image.title}
-                  className="w-full h-40 object-cover"
-                  loading="lazy"
-                />
-              </div>
+              <GalleryPreviewCard key={image.id} image={image} />
             ))}
           </div>
         </div>
       </section>
 
       {/* Stats Section */}
-      <section className="py-12 bg-white -mt-1">
+      <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {stats.map((stat, index) => (
-              <div key={index} className="text-center p-6 bg-gradient-to-br from-teal-50 to-white rounded-2xl card-shadow">
+              <div key={index} className="text-center p-6 bg-gradient-to-br from-teal-50 to-white rounded-2xl card-shadow card-shadow-hover">
                 <div className="text-4xl font-bold text-teal-600 mb-2">{stat.number}</div>
-                <div className="text-gray-600">{stat.label}</div>
+                <div className="text-gray-600 font-medium">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -146,6 +162,7 @@ const Home = () => {
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
               Mengapa Memilih <span className="text-gradient">Rumah Quran Syababul Khair?</span>
             </h2>
+            <div className="section-divider mb-6"></div>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               Kami berkomitmen memberikan pendidikan Al-Quran terbaik dengan metode yang tepat dan lingkungan yang kondusif
             </p>
@@ -188,9 +205,10 @@ const Home = () => {
             </div>
             <div>
               <span className="text-teal-600 font-semibold">Sambutan Pimpinan</span>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-2 mb-6">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-2 mb-4">
                 Selamat Datang di Rumah Quran Syababul Khair
               </h2>
+              <div className="section-divider mb-6" style={{margin: '0 0 1.5rem 0'}}></div>
               <div className="space-y-4 text-gray-600 leading-relaxed">
                 <p>
                   <em>Assalamu'alaikum Warahmatullahi Wabarakatuh,</em>
@@ -224,12 +242,13 @@ const Home = () => {
       </section>
 
       {/* Activities Preview */}
-      <section className="py-20 gradient-primary pattern-islamic">
+      <section className="py-20 gradient-hero pattern-islamic">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
               Kegiatan Kami
             </h2>
+            <div className="section-divider mb-6" style={{background: 'linear-gradient(90deg, #fbbf24, #fff, #fbbf24)'}}></div>
             <p className="text-lg text-teal-100 max-w-2xl mx-auto">
               Berbagai kegiatan untuk menunjang pembelajaran Al-Quran dan pembinaan karakter Islami
             </p>

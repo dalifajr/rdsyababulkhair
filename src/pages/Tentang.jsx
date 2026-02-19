@@ -46,7 +46,7 @@ const Tentang = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="gradient-primary py-20 pattern-islamic">
+      <section className="gradient-hero py-20 pattern-islamic page-hero">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center text-white">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Tentang Kami</h1>
@@ -100,6 +100,7 @@ const Tentang = () => {
               <History className="text-white" size={32} />
             </div>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Perjalanan Kami</h2>
+            <div className="section-divider mb-6"></div>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               Milestone penting dalam sejarah Rumah Quran Syababul Khair
             </p>
@@ -142,7 +143,8 @@ const Tentang = () => {
               <div className="inline-flex items-center justify-center w-16 h-16 gradient-gold rounded-full mb-6">
                 <Award className="text-white" size={32} />
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Pencapaian Kami</h2>
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Pencapaian Kami</h2>
+              <div className="section-divider mb-6" style={{margin: '0 0 1.5rem 0'}}></div>
               <p className="text-gray-600 mb-8 leading-relaxed">
                 Alhamdulillah, dengan izin Allah SWT dan dukungan dari berbagai pihak,
                 Rumah Quran Syababul Khair telah mencapai berbagai pencapaian yang membanggakan.
@@ -180,7 +182,7 @@ const Tentang = () => {
       </section>
 
       {/* Why Choose Us */}
-      <section className="py-20 gradient-primary pattern-islamic">
+      <section className="py-20 gradient-hero pattern-islamic">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">

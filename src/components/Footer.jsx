@@ -4,9 +4,12 @@ import Logo from './Logo'
 
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-br from-teal-800 to-teal-900 text-white">
+    <footer className="bg-gradient-to-br from-teal-800 via-teal-900 to-teal-950 text-white relative">
+      {/* Gold accent line at top */}
+      <div className="h-1 bg-gradient-to-r from-amber-400 via-teal-400 to-amber-400"></div>
+      
       {/* Main Footer */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* About */}
           <div>
