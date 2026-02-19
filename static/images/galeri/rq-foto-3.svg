@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="bg3" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1e3a5f"/>
+      <stop offset="100%" style="stop-color:#0c1929"/>
+    </linearGradient>
+    <pattern id="stars" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+      <circle cx="20" cy="30" r="1.5" fill="rgba(251,191,36,0.4)"/>
+      <circle cx="70" cy="15" r="1" fill="rgba(255,255,255,0.3)"/>
+      <circle cx="50" cy="70" r="1.5" fill="rgba(255,255,255,0.25)"/>
+      <circle cx="85" cy="55" r="1" fill="rgba(251,191,36,0.3)"/>
+      <circle cx="10" cy="80" r="1" fill="rgba(255,255,255,0.2)"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg3)"/>
+  <rect width="800" height="600" fill="url(#stars)"/>
+  <!-- Moon -->
+  <g transform="translate(600,120)">
+    <circle cx="0" cy="0" r="50" fill="rgba(251,191,36,0.25)"/>
+    <circle cx="15" cy="-10" r="40" fill="#1e3a5f"/>
+  </g>
+  <!-- Group silhouettes -->
+  <g transform="translate(400,380)" fill="white" opacity="0.1">
+    <circle cx="-120" cy="-30" r="25"/>
+    <rect x="-140" y="-5" width="40" height="80" rx="10"/>
+    <circle cx="-50" cy="-40" r="28"/>
+    <rect x="-73" y="-12" width="46" height="90" rx="10"/>
+    <circle cx="20" cy="-35" r="26"/>
+    <rect x="0" y="-9" width="40" height="85" rx="10"/>
+    <circle cx="90" cy="-30" r="25"/>
+    <rect x="70" y="-5" width="40" height="80" rx="10"/>
+    <circle cx="160" cy="-38" r="27"/>
+    <rect x="138" y="-11" width="44" height="88" rx="10"/>
+  </g>
+  <!-- Ground -->
+  <rect x="0" y="480" width="800" height="120" fill="rgba(255,255,255,0.03)"/>
+  <text x="400" y="540" text-anchor="middle" font-family="serif" font-size="22" fill="rgba(251,191,36,0.35)" font-style="italic">الجماعة</text>
+</svg>

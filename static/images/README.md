@@ -1,14 +1,19 @@
-# Penempatan Foto Website RQ Syababul Khair
+# Gambar Website RQ Syababul Khair
 
-Silakan letakkan foto yang Anda kirim ke file berikut agar tampil otomatis:
+Website sudah menggunakan placeholder SVG bawaan yang otomatis tampil.
 
-## Latar Belakang
-- `static/images/bg/rq-syababul-khair-hero.jpg`
+## Mengganti dengan Foto Asli
 
-## Galeri Tambahan
+Untuk mengganti placeholder SVG dengan foto asli, letakkan file di lokasi berikut:
+
+### Latar Belakang Hero
+- `static/images/bg/rq-syababul-khair-hero.jpg` *(atau .webp/.png)*
+
+### Galeri
 - `static/images/galeri/rq-foto-1.jpg`
 - `static/images/galeri/rq-foto-2.jpg`
 - `static/images/galeri/rq-foto-3.jpg`
 - `static/images/galeri/rq-foto-4.jpg`
 
-Setelah menaruh file, jalankan ulang frontend (`npm run dev`) jika sedang aktif.
+> **Catatan:** Jika menambah foto asli, perbarui ekstensi file di `src/data/siteContent.js`
+> dan `src/pages/Home.jsx` / `src/pages/Profile.jsx` untuk hero background.

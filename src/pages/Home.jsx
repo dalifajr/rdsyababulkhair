@@ -78,9 +78,9 @@ const Home = () => {
     <div className="overflow-hidden">
       <section
         className="relative min-h-[90vh] flex items-center bg-cover bg-center"
-        style={{ backgroundImage: "url('/images/bg/rq-syababul-khair-hero.jpg')" }}
+        style={{ backgroundImage: "url('/images/bg/rq-syababul-khair-hero.svg')" }}
       >
-        <div className="absolute inset-0 bg-teal-950/75"></div>
+        <div className="absolute inset-0 bg-teal-950/60"></div>
         <div className="absolute inset-0 pattern-islamic"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="relative z-10 grid lg:grid-cols-2 gap-12 items-center">

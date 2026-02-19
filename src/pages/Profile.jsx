@@ -22,9 +22,9 @@ const Profile = () => {
     <div className="min-h-screen">
       <section
         className="relative py-24 bg-cover bg-center page-hero"
-        style={{ backgroundImage: "url('/images/bg/rq-syababul-khair-hero.jpg')" }}
+        style={{ backgroundImage: "url('/images/bg/rq-syababul-khair-hero.svg')" }}
       >
-        <div className="absolute inset-0 bg-teal-950/75"></div>
+        <div className="absolute inset-0 bg-teal-950/60"></div>
         <div className="absolute inset-0 pattern-islamic"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="relative z-10 text-center text-white">

@@ -51,7 +51,7 @@ export const defaultProfileElements = [
 export const defaultGalleryImages = [
   {
     id: 101,
-    src: '/images/galeri/rq-foto-1.jpg',
+    src: '/images/galeri/rq-foto-1.svg',
     title: 'Belajar Al-Quran Bersama',
     category: 'Kegiatan Mengaji',
     description: 'Santri belajar membaca Al-Quran dalam suasana hangat dan fokus.',
@@ -59,7 +59,7 @@ export const defaultGalleryImages = [
   },
   {
     id: 102,
-    src: '/images/galeri/rq-foto-2.jpg',
+    src: '/images/galeri/rq-foto-2.svg',
     title: 'Majelis Pembinaan Santri',
     category: 'Kegiatan Mengaji',
     description: 'Kegiatan pembinaan keislaman bersama ustadzah dan santri putri.',
@@ -67,7 +67,7 @@ export const defaultGalleryImages = [
   },
   {
     id: 103,
-    src: '/images/galeri/rq-foto-3.jpg',
+    src: '/images/galeri/rq-foto-3.svg',
     title: 'Kebersamaan Malam Bina Iman',
     category: 'Kegiatan Outdoor',
     description: 'Momen kebersamaan santri dan pengurus dalam kegiatan malam bina iman.',
@@ -75,7 +75,7 @@ export const defaultGalleryImages = [
   },
   {
     id: 104,
-    src: '/images/galeri/rq-foto-4.jpg',
+    src: '/images/galeri/rq-foto-4.svg',
     title: 'Dokumentasi Kegiatan Akbar',
     category: 'Kegiatan Outdoor',
     description: 'Foto bersama peserta pada kegiatan akbar RQ Syababul Khair.',
@@ -83,7 +83,7 @@ export const defaultGalleryImages = [
   },
   {
     id: 1,
-    src: '/images/gallery/mengaji-1.jpg',
+    src: '/images/gallery/mengaji-1.svg',
     title: 'Kegiatan Mengaji Rutin',
     category: 'Kegiatan Mengaji',
     description: 'Santri sedang belajar mengaji dengan metode klasikal.',
@@ -91,7 +91,7 @@ export const defaultGalleryImages = [
   },
   {
     id: 2,
-    src: '/images/gallery/wisuda-1.jpg',
+    src: '/images/gallery/wisuda-1.svg',
     title: 'Wisuda Santri',
     category: 'Wisuda',
     description: 'Momen wisuda santri setelah menyelesaikan program pembinaan.',
@@ -99,7 +99,7 @@ export const defaultGalleryImages = [
   },
   {
     id: 3,
-    src: '/images/gallery/lomba-1.jpg',
+    src: '/images/gallery/lomba-1.svg',
     title: 'Lomba Tahfidz',
     category: 'Lomba',
     description: 'Kompetisi hafalan Al-Quran antar santri.',

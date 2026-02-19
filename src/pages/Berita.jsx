@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Calendar, User, ArrowRight, Clock } from 'lucide-react'
+import { Calendar, User, ArrowRight, Clock, FileText } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { getNewsItems } from '../data/siteContent'
 
@@ -85,8 +85,11 @@ const Berita = () => {
               <div className="mb-12">
                 <div className="bg-white rounded-3xl card-shadow overflow-hidden">
                   <div className="grid md:grid-cols-2">
-                    <div className="bg-gradient-to-br from-teal-100 to-teal-200 p-8 flex items-center justify-center min-h-[300px]">
-                      <div className="text-teal-400 text-6xl">📰</div>
+                    <div className="bg-gradient-to-br from-teal-500 to-teal-700 p-8 flex items-center justify-center min-h-[300px]">
+                      <div className="text-center">
+                        <FileText className="text-white/30 mx-auto mb-3" size={64} />
+                        <span className="text-white/40 text-sm font-medium">{filteredNews[0].category}</span>
+                      </div>
                     </div>
                     <div className="p-8 flex flex-col justify-center">
                       <span className={`inline-block px-3 py-1 rounded-full text-sm font-medium mb-4 w-fit ${getCategoryColor(filteredNews[0].category)}`}>
@@ -124,7 +127,7 @@ const Berita = () => {
                   {filteredNews.slice(1).map((news) => (
                     <article key={news.id} className="bg-white rounded-2xl card-shadow card-shadow-hover overflow-hidden transition-all duration-300">
                       <div className="bg-gradient-to-br from-teal-50 to-teal-100 p-8 flex items-center justify-center">
-                        <div className="text-teal-300 text-4xl">📄</div>
+                        <FileText className="text-teal-300" size={40} />
                       </div>
                       <div className="p-6">
                         <div className="flex items-center gap-4 mb-4">

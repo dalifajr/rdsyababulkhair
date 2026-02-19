@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="bgl" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1d4ed8"/>
+      <stop offset="100%" style="stop-color:#1e3a8a"/>
+    </linearGradient>
+    <pattern id="pl" x="0" y="0" width="80" height="80" patternUnits="userSpaceOnUse">
+      <path d="M40 0L80 40L40 80L0 40Z" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="0.8"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="600" fill="url(#bgl)"/>
+  <rect width="800" height="600" fill="url(#pl)"/>
+  <g transform="translate(400,230)" fill="white" opacity="0.12">
+    <!-- Trophy -->
+    <path d="M-30-80 L30-80 L25,0 Q0,30 -25,0Z"/>
+    <rect x="-15" y="0" width="30" height="20" rx="3"/>
+    <rect x="-25" y="20" width="50" height="10" rx="5"/>
+    <path d="M-30-70 Q-70-50 -40,-10" fill="none" stroke="white" stroke-width="8" stroke-linecap="round"/>
+    <path d="M30-70 Q70-50 40,-10" fill="none" stroke="white" stroke-width="8" stroke-linecap="round"/>
+    <text x="0" y="-35" text-anchor="middle" font-family="serif" font-size="30" fill="rgba(251,191,36,0.5)">١</text>
+  </g>
+  <g fill="rgba(96,165,250,0.2)">
+    <circle cx="150" cy="100" r="4"/>
+    <circle cx="650" cy="80" r="3"/>
+    <circle cx="100" cy="500" r="3"/>
+    <circle cx="700" cy="480" r="4"/>
+  </g>
+  <text x="400" y="420" text-anchor="middle" font-family="serif" font-size="24" fill="rgba(147,197,253,0.4)" font-style="italic">المُسَابَقَة</text>
+</svg>
