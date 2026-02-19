@@ -1,20 +1,32 @@
-# Laravel files - exclude from Vercel
-app/
-bootstrap/
-config/
-database/
-routes/
-storage/
+# Development & testing files
 tests/
-vendor/
-artisan
-composer.json
-composer.lock
 phpunit.xml
-*.php
+.env.example
 
-# Other excludes
-.env
-.env.*
+# IDE & OS files
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Build artifacts (Vercel builds fresh)
+dist/
 node_modules/
+
+# Git
 .git/
+.gitignore
+.gitattributes
+
+# Documentation
+README.md
+CHANGELOG.md
+
+# Laravel log files (not needed on deploy)
+storage/logs/*
+
+# Database seeders and factories
+database/seeders/
+database/factories/
